@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>math</title>
+      <link href="/2019/04/27/math/"/>
+      <url>/2019/04/27/math/</url>
+      
+        <content type="html"><![CDATA[<p> $\frac{x}{y}$</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>强化学习</title>
+      <link href="/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<p>\begin{equation}<br>f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu^)2}{z\sigma^2}}<br>\end{equation}</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NLP</title>
+      <link href="/2019/04/27/NLP/"/>
+      <url>/2019/04/27/NLP/</url>
+      
+        <content type="html"><![CDATA[<p>1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ ()</p><p>A 0.2375<br>B 0.3275<br>C 0.5273<br>D 0.5372</p><p>解析:<br>\begin{split}<br>\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\<br> &amp;= -\sum P(Y|X)P(X)\log P(Y|X)<br>\end{split}</p><p>\begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\<br> &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\<br> &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\<br> &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\<br> &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp;\frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\<br>&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375<br>\end{split}</p><p><font color="red">特别注意： 这里的$log$是以$10$为底的对数函数。</font><br>答案：A</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> nlp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nlp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>知识图谱</title>
+      <link href="/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+      <url>/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>随机森林</title>
+      <link href="/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/"/>
+      <url>/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>random-forest</title>
+      <link href="/2019/04/27/random-forest/"/>
+      <url>/2019/04/27/random-forest/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
