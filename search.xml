@@ -1,97 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>math</title>
-      <link href="/2019/04/27/math/"/>
-      <url>/2019/04/27/math/</url>
-      
-        <content type="html"><![CDATA[<p> $\frac{x}{y}$</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>强化学习</title>
-      <link href="/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-      <url>/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
-      
-        <content type="html"><![CDATA[<p>\begin{equation}<br>f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu^)2}{z\sigma^2}}<br>\end{equation}</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>NLP</title>
-      <link href="/2019/04/27/NLP/"/>
-      <url>/2019/04/27/NLP/</url>
-      
-        <content type="html"><![CDATA[<p>1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ ()</p><p>A 0.2375<br>B 0.3275<br>C 0.5273<br>D 0.5372</p><p>解析:<br>\begin{split}<br>\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\<br> &amp;= -\sum P(Y|X)P(X)\log P(Y|X)<br>\end{split}</p><p>\begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\<br> &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\<br> &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\<br> &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\<br> &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp;\frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\<br>&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375<br>\end{split}</p><p><font color="red">特别注意： 这里的$log$是以$10$为底的对数函数。</font><br>答案：A</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[math]]></title>
+    <url>%2F2019%2F04%2F27%2Fmath%2F</url>
+    <content type="text"><![CDATA[$\frac{x}{y}$]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[强化学习]]></title>
+    <url>%2F2019%2F04%2F27%2F%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[\begin{equation}f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu^)2}{z\sigma^2}}\end{equation}]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[NLP]]></title>
+    <url>%2F2019%2F04%2F27%2FNLP%2F</url>
+    <content type="text"><![CDATA[1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ () A 0.2375B 0.3275C 0.5273D 0.5372 解析:\begin{split}\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\ &amp;= -\sum P(Y|X)P(X)\log P(Y|X)\end{split} \begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\ &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\ &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\ &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\ &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp;\frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375\end{split} 特别注意： 这里的$log$是以$10$为底的对数函数。答案：A]]></content>
       <categories>
-          
-          <category> nlp </category>
-          
+        <category>nlp</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> nlp </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>知识图谱</title>
-      <link href="/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-      <url>/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>随机森林</title>
-      <link href="/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/"/>
-      <url>/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>random-forest</title>
-      <link href="/2019/04/27/random-forest/"/>
-      <url>/2019/04/27/random-forest/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>nlp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[知识图谱]]></title>
+    <url>%2F2019%2F04%2F27%2F%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[随机森林]]></title>
+    <url>%2F2019%2F04%2F27%2F%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%2F</url>
+    <content type="text"><![CDATA[随机森林（Random Forest, RF）算法是一种重要的基于Bagging的集成学习方法。随机森林可以用来解决分类、回归等问题。在正式介绍随机森林之前，需要介绍集成学习的相关概念。 集成学习集成学习的思想就是要通过训练多个分类器来共同解决一个复杂分类问题。在集成学习方法中，其泛化能力比单个学习算法的泛化能力强很多。根据多个分类器学习方式的不同，集成学习方法可以分为Bagging算法和Boosting算法。（1）Bagging（Bootstrap Aggregating）算法通过对训练样本有放回的抽取，由此产生多个训练数据子集，并在每个训练数据子集上训练一个分类器。最终的分类结果由多个分类器投票产生。（2）Boosting算法通过顺序地给训练集中的数据项重新加权创造创造不同的基础学习器。训练开始时，所有的数据项都被初始化为同一个权重。之后，每次增强的迭代都会生成一个适应加权之后的训练数据集的基础学习器。每一次迭代的错误率都会计算出来，正确划分的数据项的权重会被降低，而被错误划分的数据项权重将会增大。Boosting算法的最终模型是一系列基础学习器的线性组合，而且系数依赖于各个基础学习器的表现。 随机森林随机森林算法由一系列决策树组成。 通过Bootstrap重采样技术，从原始训练样本集中有放回地重复随机抽样$m$个样本，生成新的训练样本集合，然后根据自助样本集生成$k$个分类树组成随机森林。新数据的分类结果根据决策树投票形成的分数决定。这里我们采用CART分类树作为随机森林的决策树。CART算法是决策树（主要的决策树模型有ID3算法、C4.5算法和CART算法）的一种。于ID3和C4.5不同的是，CART既可以用来解决分类问题，也可以用来处理回归问题。在CART分类树算法中，利用Gini指数作为划分数据集属性的指标。设有一数据集，记为$D$。假设有$K$个分类，样本属于第$k$个类的概率为$p_k$，则此概率的Gini指数为：\begin{equation}Gini(p) = \sum_{k=1}^{K}p_k(1-p_k)=1-\sum_{k=1}^{K}p_k^2\tag{1}\end{equation}对于数据集$D$，其Gini指数为：\begin{equation}Gini(D) = 1 - \sum_{k=1}^{K}\left(\frac{|C_k|}{|D|}\right)^2\tag{2}\end{equation}其中$|C_k|$表示数据集$D$中，属于类别$k$的样本个数。若根据特征$A$将数据集$D$划分成独立的两个数据集$D_1$和$D_2$，则此时Gini指数为:\begin{equation}Gini\left(D, A\right) = \frac{|D_1|}{|D|}Gini(D_1) + \frac{|D_2|}{|D|}Gini(D_2)\tag{3}\end{equation}在划分数据属性时，需要设置划分终止条件。通常终止条件可以是：（1 节点中的样本数小于给定阈值；（2）样本集的Gini指数小于给定阈值（样本基本属于同一类）；（3）没有更多特征 CART分类树的构建流程如下：（1）遍历训练数据集的所有属性和可能的切分点，寻找最佳切分属性及其最佳切分点，使得切分之后的Gini系数最小；（2）利用找到的最佳属性极其最佳切分点将训练数据集切分成两个子集，分别对应分类树中的左子树和右子树；（3）重复以上步骤（为每一个叶子节点寻找最佳切分属性及其最佳切分点，将其划分为左右字数）知道满足终止条件；（4）生成CART树。 随机森林算法是通过训练多个决策树得到综合的分类模型，其只要两个参数：构建决策树的个数$n_{tree}$和在决策树的每个节点进行分裂时需要考虑的输入特征个数$k$。其中$k$可以取$\log_2n$。这里的$n$表示训练数据集中特征（属性）的个数。对于单棵决策树的构架，流程如下：（1）随机有放回地从训练数据集中抽取$m$个样本；（2）从$n$样本特征中随机挑选$k$个特征，然后从这个$k$个特征中选择最好一个进行分裂（决策树的生成或构建）；（3）重复步骤（2），直到该节点的所有训练样本都属于同一类。注意:在决策树分裂过程中不需要剪支。 补充材料在决策树算法中，划分数据集除了Gini指数外，还有信息增益和增益率。引入信息增益（Information Gain）和增益率（Gain Ratio）之前，需要先介绍熵（Entropy）的概念。熵是度量集合纯度最常用一种指标。信息熵较小表明数据集纯度较高。 对于包含$m$个训练样本的数据集$D:{X^{(1)}, y^{(1)}, \cdots, (X^{(m)}, y^{(m)}}$，在数据集$D$中， 第$k$类样本所占的比例为$p_k$，则数据集$D$的信息熵$En(D)$为：\begin{equation}En(D)=-\sum_{k=1}^{K}\log_2np_k\tag{4}\end{equation}其中$K$表示数据集$D$的类别个数。当把样本按照特征$A$的划分成两个独立的数据集$D_1$和$D_2$时，此时数据集$D$的熵$En(D)$为两个独立数据集$D_1$的熵$En(D_1)$和$En(D_2)$的加权和：\begin{equation}\begin{split}En(D) &amp;= \frac{|D_1|}{|D|}En(D_1) + \frac{|D_2|}{|D|}En(D_2) \\&amp;= -\left( \frac{|D_1|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k + \frac{|D_2|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k \right)\end{split}\tag{5}\end{equation} 信息增益（$igain$）是对划分给定数据集前后信息熵的减少量，即：\begin{equation}igain(D, A) = En(D) - \sum_{p=1}^{P}\frac{|D_p|}{|D|}En(D_p)\tag{6}\end{equation}其中，$D_p$表示属于第$p$类的样本数。在选择数据集划分标准时，通常选择能够使得信息增益最大的划分。ID3算法是利用信息增益作为划分数据集的一种方法。增益率也可以作为选择最优划分属性的方法，C4.5就是采用增益率作为划分数据集的方法。增益率可以基于下式计算:\begin{equation}gain\_ratio(D,A) = \frac{igain(D, A)}{IV(A)}\tag{7}\end{equation}其中$IV(A)$称为$A$的固有值（Intrinsic Value）。即：\begin{equation}IV(A)=\sum_{p=1}^{P}\frac{|D_p|}{|D|}\log_2\frac{|D_p|}{|D|}\tag{8}\end{equation} 源码随机森林源码]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[random-forest]]></title>
+    <url>%2F2019%2F04%2F27%2Frandom-forest%2F</url>
+    <content type="text"></content>
+  </entry>
 </search>
