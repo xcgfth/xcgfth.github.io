@@ -1,136 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>机器学习笔试题</title>
-      <link href="/2019/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/"/>
-      <url>/2019/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<p>1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ ()</p><p>A 0.2375<br>B 0.3275<br>C 0.5273<br>D 0.5372</p><p>解析:<br>\begin{split}<br>\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\<br> &amp;= -\sum P(Y|X)P(X)\log P(Y|X)<br>\end{split}</p><p>\begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\<br> &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\<br> &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\<br> &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\<br> &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp; \frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\<br>&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375<br>\end{split}</p><font color="red">特别注意： 这里的$log$是以$10$为底的对数函数。</font><br>答案：A<br><br>2、 下列哪个不属于CRF模型对于HMM和MEMM模型的优势<br>A 特征灵活<br>B 速度快<br>C 可容纳较多上下文信息<br>D 全局最优<br><br>解析：<br>HMM（Hidden Markov Model, 隐马尔可夫模型）是对转移概率和表现概率直接建模， 统计共现概率。<br>MEMM（Maximum Entropy Markov Model, 最大熵马尔可夫模型）是对转移概率和发射概率建立联合概率，统计时统计的时条件概率， 但由于MEMM只在局部做归一化，故容易陷入局部最优。<br>CRF(Conditional Random Field，条件随机场)统计了全局概率。再做归一化时考虑了数据在全局的分布，而不是仅仅只做局部归一化，这样解决了MEMM中的标记偏置（Label Bias）的问题。<br>CRF没有HMM那样严格的独立性假设条件，因而可以容纳任意的上下文信息，特征设计灵活。CRF需要训练的参数更多，与MEMM和HMM相比，它存在训练代价大、复杂度高的缺点。<br><font color="red"><br>转移概率：给定的马氏链在某时刻处于某一状态，再经若干时间达到另一状态的条件概率。<br>表现概率：观察变量的条件概率，亦称发射概率。<br>共现概率：<br><br></font><br>答案：B<br><br>3、 模式识别中，不属于马氏距离较之于欧式距离的优点是（）<br>A 平移不变性<br>B 尺度不变性<br>C 考虑了模式的分布<br><br>解析：<br>马氏距离（Mahalanobis Distance）是由印度统计学家马哈拉洛比斯提出的，表示数据的协方差距离，是一种有效的计算两个未知样本集相似度的方法。与欧式距离不同的是，马氏距离考虑到各种特性之间的关系并且是尺度无关的（scale-invariant），即独立于测量尺度。<br>对于一个均值为$\mu=(\mu_1, \mu_2, \cdots, \mu_p)^T$, 协方差矩阵为$\Sigma$的多变量向量为$x=(x_1, x_2, \cdots, x_p)^T$, 其马氏距离为：<br><br>\begin{equation}<br>D_M(x) =\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}<br>\end{equation}<br><br>对于两个变量$x$和$y$， 其协方差计算公式：<br><br>\begin{equation}<br>cov(x, y) = \mathbb{E}(x-\mathbb{E}(x))(y-\mathbb{E}(y))<br>\end{equation}<br><br>对于含有$n$个变量（或属性）($c_1, c_2, \cdots, c_n$)的数据集，则可得协方差矩阵：<br><br>\begin{equation}<br>\Sigma=<br>\begin{bmatrix}<br>cov(c_1, c_1) &amp; cov(c_1, c_2) &amp; \cdots &amp; cov(c_1, c_n) \\<br>cov(c_2, c_1) &amp; cov(c_2, c_2) &amp; \cdots &amp; cov(c_2, c_n) \\<br>\vdots        &amp; \vdots        &amp; \ddots &amp; \vdots \\<br>cov(c_n, c_1) &amp; cov(c_n, c_2) &amp; \cdots &amp; cov(c_n, c_n)<br>\end{bmatrix}<br>\end{equation}<br><br>如果协方差矩阵为单位阵，则马氏距离就是欧式距离；如果协方差矩阵为对角阵，此时称马氏距离为正规化的欧式距离。<br>马氏距离的优点：<br>马氏距离不受量纲影响：两点之间的马氏距离与原始数据的测量单位无关；<br>由标准化数据和中心化数据计算的二点之间的距离相同；<br>马氏距离可以排除变量之间的相关性的干扰。<br><font color="red"><br>欧式距离特性有：平移不变性、旋转不变性。<br>马式距离特性有：平移不变性、旋转不变性、尺度缩放不变性、不受量纲影响的特性、考虑了模式的分布。</font><p>答案：A</p><p>4、 以下（）不属于线性分类器最佳准则。<br>A 感知器准则函数<br>B 贝叶斯分类<br>C 支持向量机<br>D Fisher准则</p><p>解析：<br>线性分类器有三大类：感知器准则函数、SVM、Fisher准则。贝叶斯分类器不是线性分类器。<br>感知器准则函数：准则函数以使错分类样本到分界面距离之和最小为原则。优点是通过错分类样本提供的信息对分类器函数进行修正。<br>支持向量机 ：基本思想是在两类线性可分条件下，所设计的分类器界面使两类之间的间隔为最大，它的基本出发点是使期望泛化风险尽可能小（使用核函数可解决非线性问题）。<br>Fisher 准则 ：更广泛的称呼是线性判别分析（LDA），将所有样本投影到一条原点出发的直线，使得同类样本距离尽可能小，不同类样本距离尽可能大，具体为最大化“广义瑞利商”。</p><p>答案：B</p><p>5、 下面有关分类算法的准确率、召回率和$F1$值的描述，错误的是：<br>A 准确率是检索出相关文档数与检索出的文档总数的比率，衡量的是检索系统的查准率<br>B 召回率是指检索出相关文档数和文档库中所有相关文档数的比率，衡量的是检索系统的查全率<br>C 正确率、召回率和$F1$值取值都在$0$和$1$之间，数值越接近$0$，查准率和查全率越高<br>D 为了解决准确率和召回率冲突的问题，引入了$F1$分数</p><p>解析：<br>这里我们使用文档分类作为示例来阐述准确率、精准率、召回率、$F1$和$AUC$。<br>假设文档库含有$n$篇文档，这些文档可分为$k$类，每类文档具有$m_k$篇文档。设有某算法可对该文档库进行分类，每类正确归档数记为$c_k(c_k &lt;= m_k)$。<br><strong>准确率</strong>（Accuracy）即是该算法分类正确的文档占所有文档库的比率。<br>\begin{split}<br>acc = \frac{\sum_{i = 1}^{k}c_k}{\sum_{i = 1}^{k}m_k}\times 100\%  = \frac{\sum_{i = 1}^{k}c_k}{n} \times 100\%<br>\end{split}<br>其中$n=\sum_{i = 1}^{k}m_k$。<br>在介绍其他概念之前，需要引入基于二分类的混淆矩阵。<font color="red">实际上，多分类问题可以划分为多个二分类问题。具体地，在多分类问题中，对某一类别$k_i(i=1,2,\cdots,k)$, 若该算法得到的类别标签属于该类别，则分类正确；若由算法得到的分类标签属于其他类别，则分类错误。由此得到了$k_i$类和其他类的二分类问题。</font></p><p>混淆矩阵定义如下：</p><table><thead><tr><th></th><th>预测值0</th><th>预测值1  </th></tr></thead><tbody><tr><td>真实值0</td><td>TN</td><td>FP</td></tr><tr><td>真实值1</td><td>FN</td><td>TP</td></tr></tbody></table><p>我们将当前所关注的分类类别的数据项称之为正例，而不受当前关注的类别的数据项称之为负例。则有：<br>TN：算法预测为负例（N），实际上也是负例（N）的个数，即算法预测对了（True）；​<br>FP：算法预测为正例（P），实际上是负例（N）的个数，即算法预测错了（False）；​<br>FN：算法预测为负例（N），实际上是正例（P）的个数，即算法预测错了（False）；​<br>TP：算法预测为正例（P），实际上也是正例（P）的个数，即算法预测对了（True）。<br>于是精准率(Precision)、召回率(Recall)和$F1$值定义如下：<br>\begin{equation}<br>prec = \frac{TP}{TP+FP}<br>\end{equation}</p><p>\begin{equation}<br>recall = \frac{TP}{TP+FN}<br>\end{equation}</p><p>\begin{equation}<br>F1 = \frac{2\times prec \times recall}{prec + recall}<br>\end{equation}</p><p>AUC被定义为ROC曲线下的面积。诸如逻辑回归这样的分类算法而言，通常预测的都是一个概率值，我们会认为设置一个阈值，超过这个阈值，就预测为其中一类，不超过这个阈值，定义为另外一类。于是，不同的阈值就对应了不同的假正率和真正率，于是通过不同的阈值就形成了假正率和真正率序列，它们就可以在直角坐标系上通过描点成为光滑曲线，这个曲线就是 ROC 曲线。<br>横坐标：假正率（False positive rate， FPR），预测为正但实际为负的样本占所有负例样本的比例。<br>\begin{equation}<br>FPR=\frac{FP}{TN+FP}<br>\end{equation}<br>纵坐标：真正率（True positive rate， TPR），这个其实就是召回率，预测为正且实际为正的样本占所有正例样本的比例。<br>\begin{equation}<br>TPR=\frac{TP}{TP+FN}<br>\end{equation}</p><p>答案：C</p><p>6、 一下几种模型方法属于判别式模型（Discriminative）的有（）<br>（1）混合高斯模型<br>（2）条件随机场模型<br>（3）区分度模型<br>（4）隐马尔可夫模型<br>A 2,3<br>B 3,4<br>C 1,4<br>D 1,2<br>解析:<br>常见的判别式模型有：<br>Logistic Regression（LR，逻辑回归）<br>Linear Discriminative Analysis(LDA，线性判别分析, Fisher准则)<br>Support Vector Machine(SVM，支持向量机)<br>Boosting（集成学习）<br>Conditional Random Field（CDF, 条件随机场）<br>Linear Regression（LR, 线性回归）<br>Neural Networks(NN, 神经网络)<br>常见的生成模型：<br>Gaussian Mixture Model（GMM，高斯混合模型以及其他类型的混合模型）<br>Hidden Markov Model（HMM，隐马尔可夫模型）<br>Naive Bayies（朴素贝叶斯）<br>Averaged One-Dependence Estimators （AODE，平均单依赖估计）<br>Latent Dirichlet Allocation（LDA主题模型）<br>Restricted Boltzmann Machine(RBM，受限玻尔兹曼机)<br>答案：A</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[分治算法]]></title>
+    <url>%2F2019%2F04%2F30%2F%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95%2F</url>
+    <content type="text"></content>
       <categories>
-          
-          <category> 机器学习 </category>
-          
+        <category>数据结构与算法分析</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 笔试 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>math</title>
-      <link href="/2019/04/27/math/"/>
-      <url>/2019/04/27/math/</url>
-      
-        <content type="html"><![CDATA[<p> $\frac{x}{y}$</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>强化学习</title>
-      <link href="/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
-      <url>/2019/04/27/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
-      
-        <content type="html"><![CDATA[<p>\begin{equation}<br>f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu^)2}{z\sigma^2}}<br>\end{equation}</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>NLP</title>
-      <link href="/2019/04/27/NLP/"/>
-      <url>/2019/04/27/NLP/</url>
-      
-        <content type="html"><![CDATA[<p>1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ ()</p><p>A 0.2375<br>B 0.3275<br>C 0.5273<br>D 0.5372</p><p>解析:<br>\begin{split}<br>\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\<br> &amp;= -\sum P(Y|X)P(X)\log P(Y|X)<br>\end{split}</p><p>\begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\<br> &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\<br> &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\<br> &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\<br> &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp;\frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\<br>&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375<br>\end{split}</p><p><font color="red">特别注意： 这里的$log$是以$10$为底的对数函数。</font><br>答案：A</p>]]></content>
-      
-      
+      <tags>
+        <tag>分而治之</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[BP神经网络]]></title>
+    <url>%2F2019%2F04%2F29%2FBP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%2F</url>
+    <content type="text"><![CDATA[初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n_l=3$。记BP网络的第$l(l=1,2,3)$层为$L_l$。故图1中的输入层、隐层和输出层分别记为$L_1$、$L_2$和$L_3$。 记$L_l$的第$i$个神经元与$L_{l+1}$的第$j$个神经元连接的权重为$W_{ij}^{(l)}$。图1中的$1$是一个偏置项，记$L_l$的偏置项为$b^{(l)}$。 BP前向传播设$L_l$的第$i$个神经元的输入为$z_i^{(l)}$，$L_l$的第$i$神经元的输出为$a_i^{(l)}$。显然，当$l=1$时，$a_i^{l}=x_i$。假设所使用的激活函数记为$f(x)$。于是，BP的前向传播可如下式计算：隐层：\begin{equation}\begin{split}z_1^{(2)} &amp;= W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)} \\a_{1}^{(2)} &amp;= f(z_1^{(2)}) = f(W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)}) \\z_2^{(2)} &amp;= W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)} \\a_{2}^{(2)} &amp; = f(z_2^{(2)}) = f(W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)}) \\\vdots \\z_m^{(2)} &amp;= W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)} \\a_m^{(2)} &amp;= f(z_m^{(2)}) = f(W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)})\end{split}\end{equation}输出层：\begin{equation}\begin{split}z_1^{(3)} &amp;= W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)} \\a_{1}^{(3)} &amp;= f(z_1^{(3)}) = f(W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)}) \\z_2^{(3)} &amp;= W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)} \\a_{2}^{(3)} &amp;= f(z_2^{(3)}) = f(W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)}) \\\vdots \\z_p^{(3)} &amp;= W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)} \\a_p^{(3)} &amp;= f(z_p^{(3)}) = f(W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)})\end{split}\end{equation} 反向传播BP源码]]></content>
       <categories>
-          
-          <category> nlp </category>
-          
+        <category>深度学习</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> nlp </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>知识图谱</title>
-      <link href="/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-      <url>/2019/04/27/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>随机森林</title>
-      <link href="/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/"/>
-      <url>/2019/04/27/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/</url>
-      
-        <content type="html"><![CDATA[<p>随机森林（Random Forest, RF）算法是一种重要的基于Bagging的集成学习方法。随机森林可以用来解决分类、回归等问题。<br>在正式介绍随机森林之前，需要介绍集成学习的相关概念。</p><h1 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h1><p>集成学习的思想就是要通过训练多个分类器来共同解决一个复杂分类问题。在集成学习方法中，其泛化能力比单个学习算法的泛化能力强很多。<br>根据多个分类器学习方式的不同，集成学习方法可以分为Bagging算法和Boosting算法。<br>（1）Bagging（Bootstrap Aggregating）算法通过对训练样本有放回的抽取，由此产生多个训练数据子集，并在每个训练数据子集上训练一个分类器。最终的分类结果由多个分类器投票产生。<br>（2）Boosting算法通过顺序地给训练集中的数据项重新加权创造创造不同的基础学习器。训练开始时，所有的数据项都被初始化为同一个权重。之后，每次增强的迭代都会生成一个适应加权之后的训练数据集的基础学习器。每一次迭代的错误率都会计算出来，正确划分的数据项的权重会被降低，而被错误划分的数据项权重将会增大。Boosting算法的最终模型是一系列基础学习器的线性组合，而且系数依赖于各个基础学习器的表现。</p><h1 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h1><p>随机森林算法由一系列决策树组成。 通过Bootstrap重采样技术，从原始训练样本集中有放回地重复随机抽样$m$个样本，生成新的训练样本集合，然后根据自助样本集生成$k$个分类树组成随机森林。新数据的分类结果根据决策树投票形成的分数决定。<br>这里我们采用CART分类树作为随机森林的决策树。CART算法是决策树（主要的决策树模型有ID3算法、C4.5算法和CART算法）的一种。于ID3和C4.5不同的是，CART既可以用来解决分类问题，也可以用来处理回归问题。<br>在CART分类树算法中，利用Gini指数作为划分数据集属性的指标。设有一数据集，记为$D$。假设有$K$个分类，样本属于第$k$个类的概率为$p_k$，则此概率的Gini指数为：<br>\begin{equation}<br>Gini(p) = \sum_{k=1}^{K}p_k(1-p_k)=1-\sum_{k=1}^{K}p_k^2<br>\tag{1}<br>\end{equation}<br>对于数据集$D$，其Gini指数为：<br>\begin{equation}<br>Gini(D) = 1 - \sum_{k=1}^{K}\left(\frac{|C_k|}{|D|}\right)^2<br>\tag{2}<br>\end{equation}<br>其中$|C_k|$表示数据集$D$中，属于类别$k$的样本个数。若根据特征$A$将数据集$D$划分成独立的两个数据集$D_1$和$D_2$，则此时Gini指数为:<br>\begin{equation}<br>Gini\left(D, A\right) = \frac{|D_1|}{|D|}Gini(D_1) + \frac{|D_2|}{|D|}Gini(D_2)<br>\tag{3}<br>\end{equation}<br>在划分数据属性时，需要设置划分终止条件。通常终止条件可以是：<br>（1 节点中的样本数小于给定阈值；<br>（2）样本集的Gini指数小于给定阈值（样本基本属于同一类）；<br>（3）没有更多特征</p><p>CART分类树的构建流程如下：<br>（1）遍历训练数据集的所有属性和可能的切分点，寻找最佳切分属性及其最佳切分点，使得切分之后的Gini系数最小；<br>（2）利用找到的最佳属性极其最佳切分点将训练数据集切分成两个子集，分别对应分类树中的左子树和右子树；<br>（3）重复以上步骤（为每一个叶子节点寻找最佳切分属性及其最佳切分点，将其划分为左右字数）知道满足终止条件；<br>（4）生成CART树。</p><p>随机森林算法是通过训练多个决策树得到综合的分类模型，其只要两个参数：构建决策树的个数$n_{tree}$和在决策树的每个节点进行分裂时需要考虑的输入特征个数$k$。其中$k$可以取$\log_2n$。这里的$n$表示训练数据集中特征（属性）的个数。对于单棵决策树的构架，流程如下：<br>（1）随机有放回地从训练数据集中抽取$m$个样本；<br>（2）从$n$样本特征中随机挑选$k$个特征，然后从这个$k$个特征中选择最好一个进行分裂（决策树的生成或构建）；<br>（3）重复步骤（2），直到该节点的所有训练样本都属于同一类。注意:在决策树分裂过程中不需要剪支。</p><h1 id="补充材料"><a href="#补充材料" class="headerlink" title="补充材料"></a>补充材料</h1><p>在决策树算法中，划分数据集除了Gini指数外，还有信息增益和增益率。<br>引入信息增益（Information Gain）和增益率（Gain Ratio）之前，需要先介绍熵（Entropy）的概念。<br><strong>熵</strong>是度量集合纯度最常用一种指标。信息熵较小表明数据集纯度较高。 对于包含$m$个训练样本的数据集$D:{X^{(1)}, y^{(1)}, \cdots, (X^{(m)}, y^{(m)}}$，在数据集$D$中， 第$k$类样本所占的比例为$p_k$，则数据集$D$的信息熵$En(D)$为：<br>\begin{equation}<br>En(D)=-\sum_{k=1}^{K}\log_2np_k<br>\tag{4}<br>\end{equation}<br>其中$K$表示数据集$D$的类别个数。<br>当把样本按照特征$A$的划分成两个独立的数据集$D_1$和$D_2$时，此时数据集$D$的熵$En(D)$为两个独立数据集$D_1$的熵$En(D_1)$和$En(D_2)$的加权和：<br>\begin{equation}<br>\begin{split}<br>En(D) &amp;= \frac{|D_1|}{|D|}En(D_1) + \frac{|D_2|}{|D|}En(D_2) \\<br>&amp;= -\left( \frac{|D_1|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k  + \frac{|D_2|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k \right)<br>\end{split}<br>\tag{5}<br>\end{equation}</p><p><strong>信息增益</strong>（$igain$）是对划分给定数据集前后信息熵的减少量，即：<br>\begin{equation}<br>igain(D, A) = En(D) - \sum_{p=1}^{P}\frac{|D_p|}{|D|}En(D_p)<br>\tag{6}<br>\end{equation}<br>其中，$D_p$表示属于第$p$类的样本数。在选择数据集划分标准时，通常选择能够使得信息增益最大的划分。ID3算法是利用信息增益作为划分数据集的一种方法。<br><strong>增益率</strong>也可以作为选择最优划分属性的方法，C4.5就是采用增益率作为划分数据集的方法。增益率可以基于下式计算:<br>\begin{equation}<br>gain\_ratio(D,A)  = \frac{igain(D, A)}{IV(A)}<br>\tag{7}<br>\end{equation}<br>其中$IV(A)$称为$A$的固有值（Intrinsic Value）。即：<br>\begin{equation}<br>IV(A)=\sum_{p=1}^{P}\frac{|D_p|}{|D|}\log_2\frac{|D_p|}{|D|}<br>\tag{8}<br>\end{equation}</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>随机森林<a href="https://github.com/xcgfth/MyFuture/tree/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97" target="_blank" rel="noopener">源码</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[字节跳动2018校招算法方向编程题第3题]]></title>
+    <url>%2F2019%2F04%2F29%2F%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A82018%E6%A0%A1%E6%8B%9B%E7%AE%97%E6%B3%95%E6%96%B9%E5%90%91%E7%BC%96%E7%A8%8B%E9%A2%98%E7%AC%AC3%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[题目描述产品经理(PM)有很多好的idea，而这些idea需要程序员实现。现在有$N$个PM，在某个时间会想出一个idea，每个idea有提出时间、所需时间和优先等级。对于一个PM来说，最想实现的idea首先考虑优先等级高的，相同的情况下优先考虑所需时间最小的，还相同的情况下选择最早想出的，没有 PM会在同一时刻提出两个idea。 同时有$M$个程序员，每个程序员空闲的时候就会查看每个PM尚未执行并且最想完成的一个idea,然后从中挑选出所需时间最小的一个idea独立实现，如果所需时间相同则选择PM序号最小的。直到完成了idea才会重复上述操作。如果有多个同时处于空闲状态的程序员，那么他们会依次进行查看idea的操作。 求每个idea实现的时间。 输入第一行三个数$N$、$M$、$P$，分别表示有$N$个PM，$M$个程序员，$P$个idea。随后有$P$行，每行有$4$个数字，分别是PM序号、提出时间、优先等级和所需时间。输出$P$行，分别表示每个idea实现的时间点。 输入描述输入第一行三个数$N$、$M$、$P$，分别表示有$N$个PM，$M$个程序员，$P$个idea。随后有$P$行，每行有$4$个数字，分别是PM序号、提出时间、优先等级和所需时间。全部数据范围$[1, 3000]$。 输出描述输出$P$行，分别表示每个idea实现的时间点。 输入示例2 2 51 1 1 21 2 1 11 3 2 22 1 1 22 3 5 5 输出示例34539 示例解析这是一个多执行机多任务调度问题。我们记PM序号、提出时间、优先等级和所需时间相对于程序员的优先级分别记为$P_{PMSeqNum}$、$P_{PropTime}$、$P_{Pror}$和$P_{RunTime}$。显然： $$P_{Prior} &gt; P_{RunTime} &gt; P_{PMSeqNum} &gt; P_{PropTime} $$ 注意：这里的优先等级表示数字越小，则优先级越高。我们以一张表格来表示程序员实现idea的整个过程。 01 2 34 5 67 8 9 1 (1, 1, 2, 1, 1) 2 (1, 1, 1, 1, 2) 3 (2, 2, 2, 1, 2) 4 (2, 1, 2, 2, 1) 5 (1, 5, 5, 2, 3) 说明： 这里的五元组$(ID, Prior, RunTime, PMSeqNum, PropTime)$分别表示程序员的ID，idea优先等级、 运行时间、 PM序号和提出时间。绿色表示idea处于执行态，褐色表示idea处于等待状态。 整体思路重点代码讲解完整代码]]></content>
       <categories>
-          
-          <category> 机器学习 </category>
-          
+        <category>笔试编程</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>random-forest</title>
-      <link href="/2019/04/27/random-forest/"/>
-      <url>/2019/04/27/random-forest/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>任务调度</tag>
+        <tag>优先级队列</tag>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习笔试题]]></title>
+    <url>%2F2019%2F04%2F28%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AF%95%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ () A 0.2375B 0.3275C 0.5273D 0.5372 解析:\begin{split}\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\ &amp;= -\sum P(Y|X)P(X)\log P(Y|X)\end{split} \begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\ &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\ &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\ &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\ &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp; \frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375\end{split} 特别注意： 这里的$log$是以$10$为底的对数函数。答案：A2、 下列哪个不属于CRF模型对于HMM和MEMM模型的优势A 特征灵活B 速度快C 可容纳较多上下文信息D 全局最优解析：HMM（Hidden Markov Model, 隐马尔可夫模型）是对转移概率和表现概率直接建模， 统计共现概率。MEMM（Maximum Entropy Markov Model, 最大熵马尔可夫模型）是对转移概率和发射概率建立联合概率，统计时统计的时条件概率， 但由于MEMM只在局部做归一化，故容易陷入局部最优。CRF(Conditional Random Field，条件随机场)统计了全局概率。再做归一化时考虑了数据在全局的分布，而不是仅仅只做局部归一化，这样解决了MEMM中的标记偏置（Label Bias）的问题。CRF没有HMM那样严格的独立性假设条件，因而可以容纳任意的上下文信息，特征设计灵活。CRF需要训练的参数更多，与MEMM和HMM相比，它存在训练代价大、复杂度高的缺点。转移概率：给定的马氏链在某时刻处于某一状态，再经若干时间达到另一状态的条件概率。表现概率：观察变量的条件概率，亦称发射概率。共现概率：答案：B3、 模式识别中，不属于马氏距离较之于欧式距离的优点是（）A 平移不变性B 尺度不变性C 考虑了模式的分布解析：马氏距离（Mahalanobis Distance）是由印度统计学家马哈拉洛比斯提出的，表示数据的协方差距离，是一种有效的计算两个未知样本集相似度的方法。与欧式距离不同的是，马氏距离考虑到各种特性之间的关系并且是尺度无关的（scale-invariant），即独立于测量尺度。对于一个均值为$\mu=(\mu_1, \mu_2, \cdots, \mu_p)^T$, 协方差矩阵为$\Sigma$的多变量向量为$x=(x_1, x_2, \cdots, x_p)^T$, 其马氏距离为：\begin{equation}D_M(x) =\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}\end{equation}对于两个变量$x$和$y$， 其协方差计算公式：\begin{equation}cov(x, y) = \mathbb{E}(x-\mathbb{E}(x))(y-\mathbb{E}(y))\end{equation}对于含有$n$个变量（或属性）($c_1, c_2, \cdots, c_n$)的数据集，则可得协方差矩阵：\begin{equation}\Sigma=\begin{bmatrix}cov(c_1, c_1) &amp; cov(c_1, c_2) &amp; \cdots &amp; cov(c_1, c_n) \\cov(c_2, c_1) &amp; cov(c_2, c_2) &amp; \cdots &amp; cov(c_2, c_n) \\\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\cov(c_n, c_1) &amp; cov(c_n, c_2) &amp; \cdots &amp; cov(c_n, c_n)\end{bmatrix}\end{equation}如果协方差矩阵为单位阵，则马氏距离就是欧式距离；如果协方差矩阵为对角阵，此时称马氏距离为正规化的欧式距离。马氏距离的优点：马氏距离不受量纲影响：两点之间的马氏距离与原始数据的测量单位无关；由标准化数据和中心化数据计算的二点之间的距离相同；马氏距离可以排除变量之间的相关性的干扰。欧式距离特性有：平移不变性、旋转不变性。马式距离特性有：平移不变性、旋转不变性、尺度缩放不变性、不受量纲影响的特性、考虑了模式的分布。 答案：A 4、 以下（）不属于线性分类器最佳准则。A 感知器准则函数B 贝叶斯分类C 支持向量机D Fisher准则 解析：线性分类器有三大类：感知器准则函数、SVM、Fisher准则。贝叶斯分类器不是线性分类器。感知器准则函数：准则函数以使错分类样本到分界面距离之和最小为原则。优点是通过错分类样本提供的信息对分类器函数进行修正。支持向量机 ：基本思想是在两类线性可分条件下，所设计的分类器界面使两类之间的间隔为最大，它的基本出发点是使期望泛化风险尽可能小（使用核函数可解决非线性问题）。Fisher 准则 ：更广泛的称呼是线性判别分析（LDA），将所有样本投影到一条原点出发的直线，使得同类样本距离尽可能小，不同类样本距离尽可能大，具体为最大化“广义瑞利商”。 答案：B 5、 下面有关分类算法的准确率、召回率和$F1$值的描述，错误的是：A 准确率是检索出相关文档数与检索出的文档总数的比率，衡量的是检索系统的查准率B 召回率是指检索出相关文档数和文档库中所有相关文档数的比率，衡量的是检索系统的查全率C 正确率、召回率和$F1$值取值都在$0$和$1$之间，数值越接近$0$，查准率和查全率越高D 为了解决准确率和召回率冲突的问题，引入了$F1$分数 解析：这里我们使用文档分类作为示例来阐述准确率、精准率、召回率、$F1$和$AUC$。假设文档库含有$n$篇文档，这些文档可分为$k$类，每类文档具有$m_k$篇文档。设有某算法可对该文档库进行分类，每类正确归档数记为$c_k(c_k &lt;= m_k)$。准确率（Accuracy）即是该算法分类正确的文档占所有文档库的比率。\begin{split}acc = \frac{\sum_{i = 1}^{k}c_k}{\sum_{i = 1}^{k}m_k}\times 100\% = \frac{\sum_{i = 1}^{k}c_k}{n} \times 100\%\end{split}其中$n=\sum_{i = 1}^{k}m_k$。在介绍其他概念之前，需要引入基于二分类的混淆矩阵。实际上，多分类问题可以划分为多个二分类问题。具体地，在多分类问题中，对某一类别$k_i(i=1,2,\cdots,k)$, 若该算法得到的类别标签属于该类别，则分类正确；若由算法得到的分类标签属于其他类别，则分类错误。由此得到了$k_i$类和其他类的二分类问题。 混淆矩阵定义如下： 预测值0 预测值1 真实值0 TN FP 真实值1 FN TP 我们将当前所关注的分类类别的数据项称之为正例，而不受当前关注的类别的数据项称之为负例。则有：TN：算法预测为负例（N），实际上也是负例（N）的个数，即算法预测对了（True）；​FP：算法预测为正例（P），实际上是负例（N）的个数，即算法预测错了（False）；​FN：算法预测为负例（N），实际上是正例（P）的个数，即算法预测错了（False）；​TP：算法预测为正例（P），实际上也是正例（P）的个数，即算法预测对了（True）。于是精准率(Precision)、召回率(Recall)和$F1$值定义如下：\begin{equation}prec = \frac{TP}{TP+FP}\end{equation} \begin{equation}recall = \frac{TP}{TP+FN}\end{equation} \begin{equation}F1 = \frac{2\times prec \times recall}{prec + recall}\end{equation} AUC被定义为ROC曲线下的面积。诸如逻辑回归这样的分类算法而言，通常预测的都是一个概率值，我们会认为设置一个阈值，超过这个阈值，就预测为其中一类，不超过这个阈值，定义为另外一类。于是，不同的阈值就对应了不同的假正率和真正率，于是通过不同的阈值就形成了假正率和真正率序列，它们就可以在直角坐标系上通过描点成为光滑曲线，这个曲线就是 ROC 曲线。横坐标：假正率（False positive rate， FPR），预测为正但实际为负的样本占所有负例样本的比例。\begin{equation}FPR=\frac{FP}{TN+FP}\end{equation}纵坐标：真正率（True positive rate， TPR），这个其实就是召回率，预测为正且实际为正的样本占所有正例样本的比例。\begin{equation}TPR=\frac{TP}{TP+FN}\end{equation} 答案：C 6、 一下几种模型方法属于判别式模型（Discriminative）的有（）（1）混合高斯模型（2）条件随机场模型（3）区分度模型（4）隐马尔可夫模型A 2,3B 3,4C 1,4D 1,2解析:常见的判别式模型有：Logistic Regression（LR，逻辑回归）Linear Discriminative Analysis(LDA，线性判别分析, Fisher准则)Support Vector Machine(SVM，支持向量机)Boosting（集成学习）Conditional Random Field（CDF, 条件随机场）Linear Regression（LR, 线性回归）Neural Networks(NN, 神经网络)常见的生成模型：Gaussian Mixture Model（GMM，高斯混合模型以及其他类型的混合模型）Hidden Markov Model（HMM，隐马尔可夫模型）Naive Bayies（朴素贝叶斯）Averaged One-Dependence Estimators （AODE，平均单依赖估计）Latent Dirichlet Allocation（LDA主题模型）Restricted Boltzmann Machine(RBM，受限玻尔兹曼机)答案：A 7、你正在使用带有L1正则化的logistic回归做二分类，其中$C$是正则化参数，$w_1$和$w_2$是$x_1$和$x_2$的系数。当你把$C$值从$0$增加到非常大的值时，下面哪个选项是正确的？A 第一个$w_2$成了$0$，接着$w_1$也成了$0$B 第一个$w_1$成了$0$，接着$w_2$也成了$0$C $w_1$和$w_2$同时成了$0$D 即使在$C$成为最大值之后，$w_1$和$w_2$都不能成为$0$解析：通过图1可以看出$w_1$和$w_2$同时成了$0$ import numpy as np import numpy as np from matplotlib import pyplot as plt from mpl_toolkits.mplot3d import Axes3D fig = plt.figure() ax1 = Axes3D(fig) L1 = 1 W1 = np.linspace(-3, 3, 60) W2 = np.linspace(-5, 5, 60) C = L1 / (abs(W1) + abs(W2)) ax1.scatter3D(W1, W2, C) ax1.plot3D(W1, W2, C, 'red') ax1.set_title("$L1=C*(|w1|+|w2|)$") ax1.set_xlabel("$w_1$") ax1.set_ylabel("$w_2$") ax1.set_zlabel("$C$") plt.show() 图1 L1正则化函数图像答案：C 8、下列哪个不属于常用的文本分类的特征选择算法？A $\chi^2$检验值B 互信息C 信息增益D 主成分分析解析：常用的特征选择方法：（1）DF（Document Frequency，文档频率）：统计特征词出现的文档数量，用来衡量特征词的重要性；（2）MI（Mutual Information，互信息法）：用于衡量特征词与文档类关系的信息量。如果某个特征词的频率很低，那么互信息得分就会很高。反之，如果该特征词的频率很高，则互信息得分会很低。因此互信息法倾向低频的特征词；（3）IG（Information Gain，信息增益法）：在某个特征词的缺失与存在的两种情况，根据语料中前后信息的变化来衡量特征词的重要性。（4）$\chi^2$检验法：利用统计学中“假设检验”的基本思想。首先假设特征词与类别不直接相关，如果利用$\chi^2$分布计算出的检验值偏离阈值越大，那么更有信心否定原假设，接受原假设的备择假设：特征词与类别有着很高的关联度。（5）WLLR（Weighed Log Likelihood Ration，加权对数似然比）；（6）WFO（Weighted Frequency and Odds）:加权频率和可能性。答案： D 9、下列不是SVM核函数的是（）A 多项式和函数B logistic核函数C 径向基核函数D Sigmoid核函数 解析：SVM核函数包括线性核函数、多项式核函数、径向基(RBF)核函数（Guassian核函数）、幂指数核函数、拉普拉斯核函数、ANOVA核函数、二次有理核函数、多元二次核函数、逆多元二次核函数以及Sigmoid核函数。根据泛函有关理论，只要一种函数$\kappa(x_i, x_j)$满足Mercer条件，它就对应某一种变换空间的内积。Mercer定理：任何半正定的函数都可以作为核函数。所谓半正定的函数$f(x_i, x_j)$，是指对训练数据的集合$(x_1, x_2, \cdots, x_n)$定义一个由元素$a_{ij}=f(x_i, x_j)$组成的矩阵。显然，这个矩阵的规模是$n \times n$。如果该矩阵是半正定的，则$f(x_i, x_j)$就称为半正定函数。常见的核函数：（1）线性核函数\begin{equation}\kappa(x, z) = &lt;x, z&gt;\end{equation}（2）多项式核函数\begin{equation}\kappa(x, z) = (&lt;x, z&gt; + 1)^d, r\in Z^+\end{equation}（3）RBF核函数\begin{equation}\kappa(x, z) = e^{-\frac{\left||x-z\right||^2}{2\sigma^2}}, \sigma=R-\{0\}\end{equation}（4）幂指数核函数\begin{equation}\kappa(x, z) = e^{-\frac{\left||x - z\right||}{2\sigma^2}}\end{equation}（5）拉普拉斯核函数\begin{equation}\kappa(x,z) = e^{-\frac{\left||x - z \right||}{\sigma}}\end{equation}（6）ANOVA核函数\begin{equation}\kappa(x, z) = \sum_{k = 1}^n e\left(\sigma(x^k - z^k)^2 \right) ^ d\end{equation}（7）二次有理核函数\begin{equation}\kappa(x, z) = 1 - \frac{\left|| x - z \right||^2}{\left||x - z \right||^2 + c}\end{equation}（8）多元二次核函数\begin{equation}\kappa(x, z) = \sqrt{\left|| x - z \right||^2 + c^2}\end{equation}（9）逆多元二次核函数\begin{equation}\kappa(x, z) = \frac{1}{\sqrt{\left|| x - z \right||^2 + c^2}}\end{equation}（10）sigmoid核函数\begin{equation}\kappa(x, z) = \tanh(\alpha x^T + c)\end{equation}（11）傅立叶核函数\begin{equation}\kappa(x_i, z_j) = \frac{1}{2} + \sum_{k=1}^{N}(\sin(kx_i)\sin(kz_j) + \cos(kx_i)\cos(kz_j))\end{equation} 注：$d$表示阶数。$d$越大，映射的维度越高，计算量越大，此时容易出现“过拟合现象”。采用sigmoid作为核函数时，支持向量机实际就是一种多层感知器神经网络。此时，神经网络的隐含层节点数目、隐含层节点对输入节点的权值都是训练过程中自动确定的。支持向量机的理论基础决定了它最终求得的是全局最优值而不是局部最优值，也保证了它对于未知样本的良好泛化性能而不会出现“过拟合”现象。核函数的选择：在选择核函数解决实际问题时，通常采用的方法有：（1）利用专家的先验知识预先选定核函数；（2）采用交叉验证（Cross-validation）方法。即在进行核函数选取时，分别试用不同的核函数，归纳误差最小的核函数就是最好的核函数。如针对傅立叶核、RBF核，结合信号处理问题中的函数回归问题，通过仿真实验，对比分析了在相同数据条件下，采用傅立叶核的SVM要比采用RBF核的SVM误差小很多。（3）采用由Smits等人提出的混合核函数方法，该方法较之前两者是目前选取核函数的主流方法，也是关于如何构造核函数的又一开创性的工作．将不同的核函数结合起来后会有更好的特性，这是混合核函数方法的基本思想。答案：B]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>笔试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[math]]></title>
+    <url>%2F2019%2F04%2F27%2Fmath%2F</url>
+    <content type="text"><![CDATA[$\frac{x}{y}$]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[强化学习]]></title>
+    <url>%2F2019%2F04%2F27%2F%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[\begin{equation}f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu^)2}{z\sigma^2}}\end{equation}]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[NLP]]></title>
+    <url>%2F2019%2F04%2F27%2FNLP%2F</url>
+    <content type="text"><![CDATA[1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ () A 0.2375B 0.3275C 0.5273D 0.5372 解析:\begin{split}\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\ &amp;= -\sum P(Y|X)P(X)\log P(Y|X)\end{split} \begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\ &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\ &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\ &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\ &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp;\frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375\end{split} 特别注意： 这里的$log$是以$10$为底的对数函数。答案：A]]></content>
+      <categories>
+        <category>nlp</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[知识图谱]]></title>
+    <url>%2F2019%2F04%2F27%2F%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[随机森林]]></title>
+    <url>%2F2019%2F04%2F27%2F%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%2F</url>
+    <content type="text"><![CDATA[随机森林（Random Forest, RF）算法是一种重要的基于Bagging的集成学习方法。随机森林可以用来解决分类、回归等问题。在正式介绍随机森林之前，需要介绍集成学习的相关概念。 集成学习集成学习的思想就是要通过训练多个分类器来共同解决一个复杂分类问题。在集成学习方法中，其泛化能力比单个学习算法的泛化能力强很多。根据多个分类器学习方式的不同，集成学习方法可以分为Bagging算法和Boosting算法。（1）Bagging（Bootstrap Aggregating）算法通过对训练样本有放回的抽取，由此产生多个训练数据子集，并在每个训练数据子集上训练一个分类器。最终的分类结果由多个分类器投票产生。（2）Boosting算法通过顺序地给训练集中的数据项重新加权创造创造不同的基础学习器。训练开始时，所有的数据项都被初始化为同一个权重。之后，每次增强的迭代都会生成一个适应加权之后的训练数据集的基础学习器。每一次迭代的错误率都会计算出来，正确划分的数据项的权重会被降低，而被错误划分的数据项权重将会增大。Boosting算法的最终模型是一系列基础学习器的线性组合，而且系数依赖于各个基础学习器的表现。 随机森林随机森林算法由一系列决策树组成。 通过Bootstrap重采样技术，从原始训练样本集中有放回地重复随机抽样$m$个样本，生成新的训练样本集合，然后根据自助样本集生成$k$个分类树组成随机森林。新数据的分类结果根据决策树投票形成的分数决定。这里我们采用CART分类树作为随机森林的决策树。CART算法是决策树（主要的决策树模型有ID3算法、C4.5算法和CART算法）的一种。于ID3和C4.5不同的是，CART既可以用来解决分类问题，也可以用来处理回归问题。在CART分类树算法中，利用Gini指数作为划分数据集属性的指标。设有一数据集，记为$D$。假设有$K$个分类，样本属于第$k$个类的概率为$p_k$，则此概率的Gini指数为：\begin{equation}Gini(p) = \sum_{k=1}^{K}p_k(1-p_k)=1-\sum_{k=1}^{K}p_k^2\tag{1}\end{equation}对于数据集$D$，其Gini指数为：\begin{equation}Gini(D) = 1 - \sum_{k=1}^{K}\left(\frac{|C_k|}{|D|}\right)^2\tag{2}\end{equation}其中$|C_k|$表示数据集$D$中，属于类别$k$的样本个数。若根据特征$A$将数据集$D$划分成独立的两个数据集$D_1$和$D_2$，则此时Gini指数为:\begin{equation}Gini\left(D, A\right) = \frac{|D_1|}{|D|}Gini(D_1) + \frac{|D_2|}{|D|}Gini(D_2)\tag{3}\end{equation}在划分数据属性时，需要设置划分终止条件。通常终止条件可以是：（1 节点中的样本数小于给定阈值；（2）样本集的Gini指数小于给定阈值（样本基本属于同一类）；（3）没有更多特征 CART分类树的构建流程如下：（1）遍历训练数据集的所有属性和可能的切分点，寻找最佳切分属性及其最佳切分点，使得切分之后的Gini系数最小；（2）利用找到的最佳属性极其最佳切分点将训练数据集切分成两个子集，分别对应分类树中的左子树和右子树；（3）重复以上步骤（为每一个叶子节点寻找最佳切分属性及其最佳切分点，将其划分为左右字数）知道满足终止条件；（4）生成CART树。 随机森林算法是通过训练多个决策树得到综合的分类模型，其只要两个参数：构建决策树的个数$n_{tree}$和在决策树的每个节点进行分裂时需要考虑的输入特征个数$k$。其中$k$可以取$\log_2n$。这里的$n$表示训练数据集中特征（属性）的个数。对于单棵决策树的构架，流程如下：（1）随机有放回地从训练数据集中抽取$m$个样本；（2）从$n$样本特征中随机挑选$k$个特征，然后从这个$k$个特征中选择最好一个进行分裂（决策树的生成或构建）；（3）重复步骤（2），直到该节点的所有训练样本都属于同一类。注意:在决策树分裂过程中不需要剪支。 补充材料在决策树算法中，划分数据集除了Gini指数外，还有信息增益和增益率。引入信息增益（Information Gain）和增益率（Gain Ratio）之前，需要先介绍熵（Entropy）的概念。熵是度量集合纯度最常用一种指标。信息熵较小表明数据集纯度较高。 对于包含$m$个训练样本的数据集$D:{X^{(1)}, y^{(1)}, \cdots, (X^{(m)}, y^{(m)}}$，在数据集$D$中， 第$k$类样本所占的比例为$p_k$，则数据集$D$的信息熵$En(D)$为：\begin{equation}En(D)=-\sum_{k=1}^{K}\log_2np_k\tag{4}\end{equation}其中$K$表示数据集$D$的类别个数。当把样本按照特征$A$的划分成两个独立的数据集$D_1$和$D_2$时，此时数据集$D$的熵$En(D)$为两个独立数据集$D_1$的熵$En(D_1)$和$En(D_2)$的加权和：\begin{equation}\begin{split}En(D) &amp;= \frac{|D_1|}{|D|}En(D_1) + \frac{|D_2|}{|D|}En(D_2) \\&amp;= -\left( \frac{|D_1|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k + \frac{|D_2|}{|D|}\sum_{k=1}^{K}p_k\log_2p_k \right)\end{split}\tag{5}\end{equation} 信息增益（$igain$）是对划分给定数据集前后信息熵的减少量，即：\begin{equation}igain(D, A) = En(D) - \sum_{p=1}^{P}\frac{|D_p|}{|D|}En(D_p)\tag{6}\end{equation}其中，$D_p$表示属于第$p$类的样本数。在选择数据集划分标准时，通常选择能够使得信息增益最大的划分。ID3算法是利用信息增益作为划分数据集的一种方法。增益率也可以作为选择最优划分属性的方法，C4.5就是采用增益率作为划分数据集的方法。增益率可以基于下式计算:\begin{equation}gain\_ratio(D,A) = \frac{igain(D, A)}{IV(A)}\tag{7}\end{equation}其中$IV(A)$称为$A$的固有值（Intrinsic Value）。即：\begin{equation}IV(A)=\sum_{p=1}^{P}\frac{|D_p|}{|D|}\log_2\frac{|D_p|}{|D|}\tag{8}\end{equation} 源码随机森林源码]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[random-forest]]></title>
+    <url>%2F2019%2F04%2F27%2Frandom-forest%2F</url>
+    <content type="text"></content>
+  </entry>
 </search>

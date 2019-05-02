@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="神经网络,">
 
 
 
@@ -79,14 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
+<meta name="keywords" content="神经网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BP神经网络">
+<meta property="og:url" content="http://yoursite.com/2019/04/29/BP神经网络/index.html">
 <meta property="og:site_name" content="cgfth&#39;s blogs">
+<meta property="og:description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-27T08:05:01.692Z">
+<meta property="og:image" content="http://yoursite.com/imgs/BPNN/BPNN.png">
+<meta property="og:updated_time" content="2019-04-29T12:37:50.413Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="BP神经网络">
+<meta name="twitter:description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
+<meta name="twitter:image" content="http://yoursite.com/imgs/BPNN/BPNN.png">
 
 
 
@@ -116,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/29/BP神经网络/">
 
 
 
 
 
-  <title>tags | cgfth's blogs</title>
+  <title>BP神经网络 | cgfth's blogs</title>
   
 
 
@@ -289,40 +295,172 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/BP神经网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgfth">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cgfth.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgfth's blogs">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                8 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/nlp/" style="font-size: 12px; color: #ccc">nlp</a> <a href="/tags/任务调度/" style="font-size: 12px; color: #ccc">任务调度</a> <a href="/tags/优先级队列/" style="font-size: 12px; color: #ccc">优先级队列</a> <a href="/tags/分而治之/" style="font-size: 12px; color: #ccc">分而治之</a> <a href="/tags/堆/" style="font-size: 12px; color: #ccc">堆</a> <a href="/tags/机器学习/" style="font-size: 30px; color: #111">机器学习</a> <a href="/tags/神经网络/" style="font-size: 12px; color: #ccc">神经网络</a> <a href="/tags/笔试/" style="font-size: 12px; color: #ccc">笔试</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">BP神经网络</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-29T18:51:58+08:00">
+                2019-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="初识BP"><a href="#初识BP" class="headerlink" title="初识BP"></a>初识BP</h1><p>BP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。</p>
+<p><div align="center"><img src="/imgs/BPNN/BPNN.png" height="200" width="400">图1 BP神经网络</div><br>在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。<br>如图1，我们记BP的网络层数为$n_l$，则$n_l=3$。记BP网络的第$l(l=1,2,3)$层为$L_l$。故图1中的输入层、隐层和输出层分别记为$L_1$、$L_2$和$L_3$。 记$L_l$的第$i$个神经元与$L_{l+1}$的第$j$个神经元连接的权重为$W_{ij}^{(l)}$。图1中的$1$是一个偏置项，记$L_l$的偏置项为$b^{(l)}$。</p>
+<h1 id="BP前向传播"><a href="#BP前向传播" class="headerlink" title="BP前向传播"></a>BP前向传播</h1><p>设$L_l$的第$i$个神经元的输入为$z_i^{(l)}$，$L_l$的第$i$神经元的输出为$a_i^{(l)}$。显然，当$l=1$时，$a_i^{l}=x_i$。假设所使用的激活函数记为$f(x)$。于是，BP的前向传播可如下式计算：<br>隐层：<br>\begin{equation}<br>\begin{split}<br>z_1^{(2)} &amp;= W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)} \\<br>a_{1}^{(2)} &amp;= f(z_1^{(2)}) = f(W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)}) \\<br>z_2^{(2)} &amp;= W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)} \\<br>a_{2}^{(2)} &amp; = f(z_2^{(2)}) = f(W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)}) \\<br>\vdots \\<br>z_m^{(2)} &amp;= W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)} \\<br>a_m^{(2)} &amp;= f(z_m^{(2)}) = f(W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)})<br>\end{split}<br>\end{equation}<br>输出层：<br>\begin{equation}<br>\begin{split}<br>z_1^{(3)} &amp;= W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_{1}^{(3)} &amp;= f(z_1^{(3)}) = f(W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)}) \\<br>z_2^{(3)} &amp;= W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_{2}^{(3)} &amp;= f(z_2^{(3)}) = f(W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)}) \\<br>\vdots \\<br>z_p^{(3)} &amp;= W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_p^{(3)} &amp;= f(z_p^{(3)}) = f(W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)})<br>\end{split}<br>\end{equation}</p>
+<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h1><h1 id="BP源码"><a href="#BP源码" class="headerlink" title="BP源码"></a>BP源码</h1>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/29/字节跳动2018校招算法方向编程题第3题/" rel="next" title="字节跳动2018校招算法方向编程题第3题">
+                <i class="fa fa-chevron-left"></i> 字节跳动2018校招算法方向编程题第3题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/分治算法/" rel="prev" title="分治算法">
+                分治算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -355,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -434,6 +581,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初识BP"><span class="nav-number">1.</span> <span class="nav-text">初识BP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BP前向传播"><span class="nav-number">2.</span> <span class="nav-text">BP前向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反向传播"><span class="nav-number">3.</span> <span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BP源码"><span class="nav-number">4.</span> <span class="nav-text">BP源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

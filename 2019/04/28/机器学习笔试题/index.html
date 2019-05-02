@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="cgfth&#39;s blogs">
 <meta property="og:description" content="1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-28T05:58:11.433Z">
+<meta property="og:image" content="http://yoursite.com/imgs/MLProblems1/logistic.png">
+<meta property="og:updated_time" content="2019-05-02T15:23:01.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习笔试题">
 <meta name="twitter:description" content="1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P">
+<meta name="twitter:image" content="http://yoursite.com/imgs/MLProblems1/logistic.png">
 
 
 
@@ -434,6 +436,30 @@
 <p>AUC被定义为ROC曲线下的面积。诸如逻辑回归这样的分类算法而言，通常预测的都是一个概率值，我们会认为设置一个阈值，超过这个阈值，就预测为其中一类，不超过这个阈值，定义为另外一类。于是，不同的阈值就对应了不同的假正率和真正率，于是通过不同的阈值就形成了假正率和真正率序列，它们就可以在直角坐标系上通过描点成为光滑曲线，这个曲线就是 ROC 曲线。<br>横坐标：假正率（False positive rate， FPR），预测为正但实际为负的样本占所有负例样本的比例。<br>\begin{equation}<br>FPR=\frac{FP}{TN+FP}<br>\end{equation}<br>纵坐标：真正率（True positive rate， TPR），这个其实就是召回率，预测为正且实际为正的样本占所有正例样本的比例。<br>\begin{equation}<br>TPR=\frac{TP}{TP+FN}<br>\end{equation}</p>
 <p>答案：C</p>
 <p>6、 一下几种模型方法属于判别式模型（Discriminative）的有（）<br>（1）混合高斯模型<br>（2）条件随机场模型<br>（3）区分度模型<br>（4）隐马尔可夫模型<br>A 2,3<br>B 3,4<br>C 1,4<br>D 1,2<br>解析:<br>常见的判别式模型有：<br>Logistic Regression（LR，逻辑回归）<br>Linear Discriminative Analysis(LDA，线性判别分析, Fisher准则)<br>Support Vector Machine(SVM，支持向量机)<br>Boosting（集成学习）<br>Conditional Random Field（CDF, 条件随机场）<br>Linear Regression（LR, 线性回归）<br>Neural Networks(NN, 神经网络)<br>常见的生成模型：<br>Gaussian Mixture Model（GMM，高斯混合模型以及其他类型的混合模型）<br>Hidden Markov Model（HMM，隐马尔可夫模型）<br>Naive Bayies（朴素贝叶斯）<br>Averaged One-Dependence Estimators （AODE，平均单依赖估计）<br>Latent Dirichlet Allocation（LDA主题模型）<br>Restricted Boltzmann Machine(RBM，受限玻尔兹曼机)<br>答案：A</p>
+<p>7、你正在使用带有L1正则化的logistic回归做二分类，其中$C$是正则化参数，$w_1$和$w_2$是$x_1$和$x_2$的系数。当你把$C$值从$0$增加到非常大的值时，下面哪个选项是正确的？<br>A 第一个$w_2$成了$0$，接着$w_1$也成了$0$<br>B 第一个$w_1$成了$0$，接着$w_2$也成了$0$<br>C $w_1$和$w_2$同时成了$0$<br>D 即使在$C$成为最大值之后，$w_1$和$w_2$都不能成为$0$<br>解析：<br>通过图1可以看出$w_1$和$w_2$同时成了$0$</p>
+<pre><code class="python"><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt
+<span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D
+fig  = plt.figure()
+ax1 = Axes3D(fig)
+L1 = <span class="number">1</span>
+W1 = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">60</span>)
+W2 = np.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">60</span>)
+C = L1 / (abs(W1) + abs(W2))
+ax1.scatter3D(W1, W2, C)
+ax1.plot3D(W1, W2, C, <span class="string">'red'</span>)
+ax1.set_title(<span class="string">"$L1=C*(|w1|+|w2|)$"</span>)
+ax1.set_xlabel(<span class="string">"$w_1$"</span>)
+ax1.set_ylabel(<span class="string">"$w_2$"</span>)
+ax1.set_zlabel(<span class="string">"$C$"</span>)
+plt.show()
+</code></pre>
+<p><div align="center"><img src="/imgs/MLProblems1/logistic.png" height="200" width="400">图1 L1正则化函数图像</div><br>答案：C</p>
+<p>8、下列哪个不属于常用的文本分类的特征选择算法？<br>A $\chi^2$检验值<br>B 互信息<br>C 信息增益<br>D 主成分分析<br>解析：<br>常用的特征选择方法：<br>（1）DF（Document Frequency，文档频率）：统计特征词出现的文档数量，用来衡量特征词的重要性；<br>（2）MI（Mutual Information，互信息法）：用于衡量特征词与文档类关系的信息量。如果某个特征词的频率很低，那么互信息得分就会很高。反之，如果该特征词的频率很高，则互信息得分会很低。因此互信息法倾向低频的特征词；<br>（3）IG（Information Gain，信息增益法）：在某个特征词的缺失与存在的两种情况，根据语料中前后信息的变化来衡量特征词的重要性。<br>（4）$\chi^2$检验法：利用统计学中“假设检验”的基本思想。首先假设特征词与类别不直接相关，如果利用$\chi^2$分布计算出的检验值偏离阈值越大，那么更有信心否定原假设，接受原假设的备择假设：特征词与类别有着很高的关联度。<br>（5）WLLR（Weighed Log Likelihood Ration，加权对数似然比）；<br>（6）WFO（Weighted Frequency and Odds）:加权频率和可能性。<br>答案： D</p>
+<p>9、下列不是SVM核函数的是（）<br>A 多项式和函数<br>B logistic核函数<br>C 径向基核函数<br>D Sigmoid核函数</p>
+<p>解析：<br>SVM核函数包括线性核函数、多项式核函数、径向基(RBF)核函数（Guassian核函数）、幂指数核函数、拉普拉斯核函数、ANOVA核函数、二次有理核函数、多元二次核函数、逆多元二次核函数以及Sigmoid核函数。<br>根据泛函有关理论，只要一种函数$\kappa(x_i, x_j)$满足Mercer条件，它就对应某一种变换空间的内积。<br>Mercer定理：任何半正定的函数都可以作为核函数。所谓半正定的函数$f(x_i, x_j)$，是指对训练数据的集合$(x_1, x_2, \cdots, x_n)$定义一个由元素$a_{ij}=f(x_i, x_j)$组成的矩阵。显然，这个矩阵的规模是$n \times n$。如果该矩阵是半正定的，则$f(x_i, x_j)$就称为半正定函数。<br>常见的核函数：<br>（1）线性核函数<br>\begin{equation}<br>\kappa(x, z) = &lt;x, z&gt;<br>\end{equation}<br>（2）多项式核函数<br>\begin{equation}<br>\kappa(x, z) = (&lt;x, z&gt; + 1)^d, r\in Z^+<br>\end{equation}<br>（3）RBF核函数<br>\begin{equation}<br>\kappa(x, z) = e^{-\frac{\left||x-z\right||^2}{2\sigma^2}}, \sigma=R-\{0\}<br>\end{equation}<br>（4）幂指数核函数<br>\begin{equation}<br>\kappa(x, z) = e^{-\frac{\left||x - z\right||}{2\sigma^2}}<br>\end{equation}<br>（5）拉普拉斯核函数<br>\begin{equation}<br>\kappa(x,z) = e^{-\frac{\left||x - z \right||}{\sigma}}<br>\end{equation}<br>（6）ANOVA核函数<br>\begin{equation}<br>\kappa(x, z) = \sum_{k = 1}^n e\left(\sigma(x^k - z^k)^2 \right) ^ d<br>\end{equation}<br>（7）二次有理核函数<br>\begin{equation}<br>\kappa(x, z) = 1 - \frac{\left|| x - z \right||^2}{\left||x - z \right||^2 + c}<br>\end{equation}<br>（8）多元二次核函数<br>\begin{equation}<br>\kappa(x, z) = \sqrt{\left|| x - z \right||^2 + c^2}<br>\end{equation}<br>（9）逆多元二次核函数<br>\begin{equation}<br>\kappa(x, z) = \frac{1}{\sqrt{\left|| x - z \right||^2 + c^2}}<br>\end{equation}<br>（10）sigmoid核函数<br>\begin{equation}<br>\kappa(x, z) = \tanh(\alpha x^T + c)<br>\end{equation}<br>（11）傅立叶核函数<br>\begin{equation}<br>\kappa(x_i, z_j) = \frac{1}{2} + \sum_{k=1}^{N}(\sin(kx_i)\sin(kz_j) + \cos(kx_i)\cos(kz_j))<br>\end{equation}</p>
+<p>注：$d$表示阶数。$d$越大，映射的维度越高，计算量越大，此时容易出现“过拟合现象”。<br>采用sigmoid作为核函数时，支持向量机实际就是一种多层感知器神经网络。此时，神经网络的隐含层节点数目、隐含层节点对输入节点的权值都是训练过程中自动确定的。支持向量机的理论基础决定了它最终求得的是全局最优值而不是局部最优值，也保证了它对于未知样本的良好泛化性能而不会出现“过拟合”现象。<br>核函数的选择：在选择核函数解决实际问题时，通常采用的方法有：<br>（1）利用专家的先验知识预先选定核函数；<br>（2）采用交叉验证（Cross-validation）方法。即在进行核函数选取时，分别试用不同的核函数，归纳误差最小的核函数就是最好的核函数。如针对傅立叶核、RBF核，结合信号处理问题中的函数回归问题，通过仿真实验，对比分析了在相同数据条件下，采用傅立叶核的SVM要比采用RBF核的SVM误差小很多。<br>（3）采用由Smits等人提出的混合核函数方法，该方法较之前两者是目前选取核函数的主流方法，也是关于如何构造核函数的又一开创性的工作．将不同的核函数结合起来后会有更好的特性，这是混合核函数方法的基本思想。<br>答案：B</p>
 
       
     </div>
@@ -475,6 +501,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/字节跳动2018校招算法方向编程题第3题/" rel="prev" title="字节跳动2018校招算法方向编程题第3题">
+                字节跳动2018校招算法方向编程题第3题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -544,7 +574,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -555,7 +585,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -566,7 +596,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
