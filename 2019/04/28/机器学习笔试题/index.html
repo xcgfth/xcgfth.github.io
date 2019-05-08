@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,笔试,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P">
+<meta name="keywords" content="机器学习,笔试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习笔试题">
+<meta property="og:url" content="http://yoursite.com/2019/04/28/机器学习笔试题/index.html">
+<meta property="og:site_name" content="cgfth&#39;s blogs">
+<meta property="og:description" content="1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/imgs/MLProblems1/logistic.png">
+<meta property="og:updated_time" content="2019-05-02T15:23:01.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习笔试题">
+<meta name="twitter:description" content="1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P">
+<meta name="twitter:image" content="http://yoursite.com/imgs/MLProblems1/logistic.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'cgfth'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/28/机器学习笔试题/">
+
+
+
+
+
+  <title>机器学习笔试题 | cgfth's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cgfth's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/机器学习笔试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgfth">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cgfth.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgfth's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习笔试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T12:12:10+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>1、 一个二进制$X$发出符号集为${-1, 1}$，经过离散无记忆信道传输，由于信道中噪音的存在，在接收端$Y$收到符号集为${-1, 1, 0}$。已知$P(x=-1)=\frac{1}{4}$，$P(x=1)=\frac{3}{4}$，$P(y=-1|x=1)=\frac{4}{5}$，$P(y=0|x=-1)=\frac{1}{5}$，$P(y=1|x=1)=\frac{3}{4}$，$P(y=0|x=1)=\frac{1}{4}$，求条件熵$H(Y|X)$ ()</p>
+<p>A 0.2375<br>B 0.3275<br>C 0.5273<br>D 0.5372</p>
+<p>解析:<br>\begin{split}<br>\because\quad H(X|Y) &amp;=-\sum P(X, Y)\log P(Y|X) \\<br> &amp;= -\sum P(Y|X)P(X)\log P(Y|X)<br>\end{split}</p>
+<p>\begin{split} \therefore\quad H(X|Y)&amp;=-(P(y=-1|x=-1)P(x=-1)\log P(y=-1|x=-1) \\<br> &amp; + P(y=0|x=-1)P(x=-1)\log P(y=0|x=-1) \\<br> &amp; + P(y=1|x=1)P(x=1)\log P(y=1|x=1) \\<br> &amp; + P(y=0|x=1)P(x=1)\log P(y=0|x=1)) \\<br> &amp; =-(\frac{4}{5}\times\frac{1}{4}\times\log\frac{4}{5} + \frac{1}{5}\times\frac{1}{4}\times\log\frac{1}{5} + \frac{3}{4}\times\frac{3}{4}\times\log\frac{3}{4} + \\ &amp; \frac{1}{4}\times\frac{3}{4}\times\log\frac{1}{4}) \\<br>&amp;\approx -(-0.01938-0.03495-0.07028-0.11289)=0.2375<br>\end{split}</p>
+<font color="red">特别注意： 这里的$log$是以$10$为底的对数函数。</font><br>答案：A<br><br>2、 下列哪个不属于CRF模型对于HMM和MEMM模型的优势<br>A 特征灵活<br>B 速度快<br>C 可容纳较多上下文信息<br>D 全局最优<br><br>解析：<br>HMM（Hidden Markov Model, 隐马尔可夫模型）是对转移概率和表现概率直接建模， 统计共现概率。<br>MEMM（Maximum Entropy Markov Model, 最大熵马尔可夫模型）是对转移概率和发射概率建立联合概率，统计时统计的时条件概率， 但由于MEMM只在局部做归一化，故容易陷入局部最优。<br>CRF(Conditional Random Field，条件随机场)统计了全局概率。再做归一化时考虑了数据在全局的分布，而不是仅仅只做局部归一化，这样解决了MEMM中的标记偏置（Label Bias）的问题。<br>CRF没有HMM那样严格的独立性假设条件，因而可以容纳任意的上下文信息，特征设计灵活。CRF需要训练的参数更多，与MEMM和HMM相比，它存在训练代价大、复杂度高的缺点。<br><font color="red"><br>转移概率：给定的马氏链在某时刻处于某一状态，再经若干时间达到另一状态的条件概率。<br>表现概率：观察变量的条件概率，亦称发射概率。<br>共现概率：<br><br></font><br>答案：B<br><br>3、 模式识别中，不属于马氏距离较之于欧式距离的优点是（）<br>A 平移不变性<br>B 尺度不变性<br>C 考虑了模式的分布<br><br>解析：<br>马氏距离（Mahalanobis Distance）是由印度统计学家马哈拉洛比斯提出的，表示数据的协方差距离，是一种有效的计算两个未知样本集相似度的方法。与欧式距离不同的是，马氏距离考虑到各种特性之间的关系并且是尺度无关的（scale-invariant），即独立于测量尺度。<br>对于一个均值为$\mu=(\mu_1, \mu_2, \cdots, \mu_p)^T$, 协方差矩阵为$\Sigma$的多变量向量为$x=(x_1, x_2, \cdots, x_p)^T$, 其马氏距离为：<br><br>\begin{equation}<br>D_M(x) =\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}<br>\end{equation}<br><br>对于两个变量$x$和$y$， 其协方差计算公式：<br><br>\begin{equation}<br>cov(x, y) = \mathbb{E}(x-\mathbb{E}(x))(y-\mathbb{E}(y))<br>\end{equation}<br><br>对于含有$n$个变量（或属性）($c_1, c_2, \cdots, c_n$)的数据集，则可得协方差矩阵：<br><br>\begin{equation}<br>\Sigma=<br>\begin{bmatrix}<br>cov(c_1, c_1) &amp; cov(c_1, c_2) &amp; \cdots &amp; cov(c_1, c_n) \\<br>cov(c_2, c_1) &amp; cov(c_2, c_2) &amp; \cdots &amp; cov(c_2, c_n) \\<br>\vdots        &amp; \vdots        &amp; \ddots &amp; \vdots \\<br>cov(c_n, c_1) &amp; cov(c_n, c_2) &amp; \cdots &amp; cov(c_n, c_n)<br>\end{bmatrix}<br>\end{equation}<br><br>如果协方差矩阵为单位阵，则马氏距离就是欧式距离；如果协方差矩阵为对角阵，此时称马氏距离为正规化的欧式距离。<br>马氏距离的优点：<br>马氏距离不受量纲影响：两点之间的马氏距离与原始数据的测量单位无关；<br>由标准化数据和中心化数据计算的二点之间的距离相同；<br>马氏距离可以排除变量之间的相关性的干扰。<br><font color="red"><br>欧式距离特性有：平移不变性、旋转不变性。<br>马式距离特性有：平移不变性、旋转不变性、尺度缩放不变性、不受量纲影响的特性、考虑了模式的分布。</font>
+
+<p>答案：A</p>
+<p>4、 以下（）不属于线性分类器最佳准则。<br>A 感知器准则函数<br>B 贝叶斯分类<br>C 支持向量机<br>D Fisher准则</p>
+<p>解析：<br>线性分类器有三大类：感知器准则函数、SVM、Fisher准则。贝叶斯分类器不是线性分类器。<br>感知器准则函数：准则函数以使错分类样本到分界面距离之和最小为原则。优点是通过错分类样本提供的信息对分类器函数进行修正。<br>支持向量机 ：基本思想是在两类线性可分条件下，所设计的分类器界面使两类之间的间隔为最大，它的基本出发点是使期望泛化风险尽可能小（使用核函数可解决非线性问题）。<br>Fisher 准则 ：更广泛的称呼是线性判别分析（LDA），将所有样本投影到一条原点出发的直线，使得同类样本距离尽可能小，不同类样本距离尽可能大，具体为最大化“广义瑞利商”。</p>
+<p>答案：B</p>
+<p>5、 下面有关分类算法的准确率、召回率和$F1$值的描述，错误的是：<br>A 准确率是检索出相关文档数与检索出的文档总数的比率，衡量的是检索系统的查准率<br>B 召回率是指检索出相关文档数和文档库中所有相关文档数的比率，衡量的是检索系统的查全率<br>C 正确率、召回率和$F1$值取值都在$0$和$1$之间，数值越接近$0$，查准率和查全率越高<br>D 为了解决准确率和召回率冲突的问题，引入了$F1$分数</p>
+<p>解析：<br>这里我们使用文档分类作为示例来阐述准确率、精准率、召回率、$F1$和$AUC$。<br>假设文档库含有$n$篇文档，这些文档可分为$k$类，每类文档具有$m_k$篇文档。设有某算法可对该文档库进行分类，每类正确归档数记为$c_k(c_k &lt;= m_k)$。<br><strong>准确率</strong>（Accuracy）即是该算法分类正确的文档占所有文档库的比率。<br>\begin{split}<br>acc = \frac{\sum_{i = 1}^{k}c_k}{\sum_{i = 1}^{k}m_k}\times 100\%  = \frac{\sum_{i = 1}^{k}c_k}{n} \times 100\%<br>\end{split}<br>其中$n=\sum_{i = 1}^{k}m_k$。<br>在介绍其他概念之前，需要引入基于二分类的混淆矩阵。<font color="red">实际上，多分类问题可以划分为多个二分类问题。具体地，在多分类问题中，对某一类别$k_i(i=1,2,\cdots,k)$, 若该算法得到的类别标签属于该类别，则分类正确；若由算法得到的分类标签属于其他类别，则分类错误。由此得到了$k_i$类和其他类的二分类问题。</font></p>
+<p>混淆矩阵定义如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>预测值0</th>
+<th>预测值1  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实值0</td>
+<td>TN</td>
+<td>FP</td>
+</tr>
+<tr>
+<td>真实值1</td>
+<td>FN</td>
+<td>TP</td>
+</tr>
+</tbody>
+</table>
+<p>我们将当前所关注的分类类别的数据项称之为正例，而不受当前关注的类别的数据项称之为负例。则有：<br>TN：算法预测为负例（N），实际上也是负例（N）的个数，即算法预测对了（True）；​<br>FP：算法预测为正例（P），实际上是负例（N）的个数，即算法预测错了（False）；​<br>FN：算法预测为负例（N），实际上是正例（P）的个数，即算法预测错了（False）；​<br>TP：算法预测为正例（P），实际上也是正例（P）的个数，即算法预测对了（True）。<br>于是精准率(Precision)、召回率(Recall)和$F1$值定义如下：<br>\begin{equation}<br>prec = \frac{TP}{TP+FP}<br>\end{equation}</p>
+<p>\begin{equation}<br>recall = \frac{TP}{TP+FN}<br>\end{equation}</p>
+<p>\begin{equation}<br>F1 = \frac{2\times prec \times recall}{prec + recall}<br>\end{equation}</p>
+<p>AUC被定义为ROC曲线下的面积。诸如逻辑回归这样的分类算法而言，通常预测的都是一个概率值，我们会认为设置一个阈值，超过这个阈值，就预测为其中一类，不超过这个阈值，定义为另外一类。于是，不同的阈值就对应了不同的假正率和真正率，于是通过不同的阈值就形成了假正率和真正率序列，它们就可以在直角坐标系上通过描点成为光滑曲线，这个曲线就是 ROC 曲线。<br>横坐标：假正率（False positive rate， FPR），预测为正但实际为负的样本占所有负例样本的比例。<br>\begin{equation}<br>FPR=\frac{FP}{TN+FP}<br>\end{equation}<br>纵坐标：真正率（True positive rate， TPR），这个其实就是召回率，预测为正且实际为正的样本占所有正例样本的比例。<br>\begin{equation}<br>TPR=\frac{TP}{TP+FN}<br>\end{equation}</p>
+<p>答案：C</p>
+<p>6、 一下几种模型方法属于判别式模型（Discriminative）的有（）<br>（1）混合高斯模型<br>（2）条件随机场模型<br>（3）区分度模型<br>（4）隐马尔可夫模型<br>A 2,3<br>B 3,4<br>C 1,4<br>D 1,2<br>解析:<br>常见的判别式模型有：<br>Logistic Regression（LR，逻辑回归）<br>Linear Discriminative Analysis(LDA，线性判别分析, Fisher准则)<br>Support Vector Machine(SVM，支持向量机)<br>Boosting（集成学习）<br>Conditional Random Field（CDF, 条件随机场）<br>Linear Regression（LR, 线性回归）<br>Neural Networks(NN, 神经网络)<br>常见的生成模型：<br>Gaussian Mixture Model（GMM，高斯混合模型以及其他类型的混合模型）<br>Hidden Markov Model（HMM，隐马尔可夫模型）<br>Naive Bayies（朴素贝叶斯）<br>Averaged One-Dependence Estimators （AODE，平均单依赖估计）<br>Latent Dirichlet Allocation（LDA主题模型）<br>Restricted Boltzmann Machine(RBM，受限玻尔兹曼机)<br>答案：A</p>
+<p>7、你正在使用带有L1正则化的logistic回归做二分类，其中$C$是正则化参数，$w_1$和$w_2$是$x_1$和$x_2$的系数。当你把$C$值从$0$增加到非常大的值时，下面哪个选项是正确的？<br>A 第一个$w_2$成了$0$，接着$w_1$也成了$0$<br>B 第一个$w_1$成了$0$，接着$w_2$也成了$0$<br>C $w_1$和$w_2$同时成了$0$<br>D 即使在$C$成为最大值之后，$w_1$和$w_2$都不能成为$0$<br>解析：<br>通过图1可以看出$w_1$和$w_2$同时成了$0$</p>
+<pre><code class="python"><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt
+<span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D
+fig  = plt.figure()
+ax1 = Axes3D(fig)
+L1 = <span class="number">1</span>
+W1 = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">60</span>)
+W2 = np.linspace(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">60</span>)
+C = L1 / (abs(W1) + abs(W2))
+ax1.scatter3D(W1, W2, C)
+ax1.plot3D(W1, W2, C, <span class="string">'red'</span>)
+ax1.set_title(<span class="string">"$L1=C*(|w1|+|w2|)$"</span>)
+ax1.set_xlabel(<span class="string">"$w_1$"</span>)
+ax1.set_ylabel(<span class="string">"$w_2$"</span>)
+ax1.set_zlabel(<span class="string">"$C$"</span>)
+plt.show()
+</code></pre>
+<p><div align="center"><img src="/imgs/MLProblems1/logistic.png" height="200" width="400">图1 L1正则化函数图像</div><br>答案：C</p>
+<p>8、下列哪个不属于常用的文本分类的特征选择算法？<br>A $\chi^2$检验值<br>B 互信息<br>C 信息增益<br>D 主成分分析<br>解析：<br>常用的特征选择方法：<br>（1）DF（Document Frequency，文档频率）：统计特征词出现的文档数量，用来衡量特征词的重要性；<br>（2）MI（Mutual Information，互信息法）：用于衡量特征词与文档类关系的信息量。如果某个特征词的频率很低，那么互信息得分就会很高。反之，如果该特征词的频率很高，则互信息得分会很低。因此互信息法倾向低频的特征词；<br>（3）IG（Information Gain，信息增益法）：在某个特征词的缺失与存在的两种情况，根据语料中前后信息的变化来衡量特征词的重要性。<br>（4）$\chi^2$检验法：利用统计学中“假设检验”的基本思想。首先假设特征词与类别不直接相关，如果利用$\chi^2$分布计算出的检验值偏离阈值越大，那么更有信心否定原假设，接受原假设的备择假设：特征词与类别有着很高的关联度。<br>（5）WLLR（Weighed Log Likelihood Ration，加权对数似然比）；<br>（6）WFO（Weighted Frequency and Odds）:加权频率和可能性。<br>答案： D</p>
+<p>9、下列不是SVM核函数的是（）<br>A 多项式和函数<br>B logistic核函数<br>C 径向基核函数<br>D Sigmoid核函数</p>
+<p>解析：<br>SVM核函数包括线性核函数、多项式核函数、径向基(RBF)核函数（Guassian核函数）、幂指数核函数、拉普拉斯核函数、ANOVA核函数、二次有理核函数、多元二次核函数、逆多元二次核函数以及Sigmoid核函数。<br>根据泛函有关理论，只要一种函数$\kappa(x_i, x_j)$满足Mercer条件，它就对应某一种变换空间的内积。<br>Mercer定理：任何半正定的函数都可以作为核函数。所谓半正定的函数$f(x_i, x_j)$，是指对训练数据的集合$(x_1, x_2, \cdots, x_n)$定义一个由元素$a_{ij}=f(x_i, x_j)$组成的矩阵。显然，这个矩阵的规模是$n \times n$。如果该矩阵是半正定的，则$f(x_i, x_j)$就称为半正定函数。<br>常见的核函数：<br>（1）线性核函数<br>\begin{equation}<br>\kappa(x, z) = &lt;x, z&gt;<br>\end{equation}<br>（2）多项式核函数<br>\begin{equation}<br>\kappa(x, z) = (&lt;x, z&gt; + 1)^d, r\in Z^+<br>\end{equation}<br>（3）RBF核函数<br>\begin{equation}<br>\kappa(x, z) = e^{-\frac{\left||x-z\right||^2}{2\sigma^2}}, \sigma=R-\{0\}<br>\end{equation}<br>（4）幂指数核函数<br>\begin{equation}<br>\kappa(x, z) = e^{-\frac{\left||x - z\right||}{2\sigma^2}}<br>\end{equation}<br>（5）拉普拉斯核函数<br>\begin{equation}<br>\kappa(x,z) = e^{-\frac{\left||x - z \right||}{\sigma}}<br>\end{equation}<br>（6）ANOVA核函数<br>\begin{equation}<br>\kappa(x, z) = \sum_{k = 1}^n e\left(\sigma(x^k - z^k)^2 \right) ^ d<br>\end{equation}<br>（7）二次有理核函数<br>\begin{equation}<br>\kappa(x, z) = 1 - \frac{\left|| x - z \right||^2}{\left||x - z \right||^2 + c}<br>\end{equation}<br>（8）多元二次核函数<br>\begin{equation}<br>\kappa(x, z) = \sqrt{\left|| x - z \right||^2 + c^2}<br>\end{equation}<br>（9）逆多元二次核函数<br>\begin{equation}<br>\kappa(x, z) = \frac{1}{\sqrt{\left|| x - z \right||^2 + c^2}}<br>\end{equation}<br>（10）sigmoid核函数<br>\begin{equation}<br>\kappa(x, z) = \tanh(\alpha x^T + c)<br>\end{equation}<br>（11）傅立叶核函数<br>\begin{equation}<br>\kappa(x_i, z_j) = \frac{1}{2} + \sum_{k=1}^{N}(\sin(kx_i)\sin(kz_j) + \cos(kx_i)\cos(kz_j))<br>\end{equation}</p>
+<p>注：$d$表示阶数。$d$越大，映射的维度越高，计算量越大，此时容易出现“过拟合现象”。<br>采用sigmoid作为核函数时，支持向量机实际就是一种多层感知器神经网络。此时，神经网络的隐含层节点数目、隐含层节点对输入节点的权值都是训练过程中自动确定的。支持向量机的理论基础决定了它最终求得的是全局最优值而不是局部最优值，也保证了它对于未知样本的良好泛化性能而不会出现“过拟合”现象。<br>核函数的选择：在选择核函数解决实际问题时，通常采用的方法有：<br>（1）利用专家的先验知识预先选定核函数；<br>（2）采用交叉验证（Cross-validation）方法。即在进行核函数选取时，分别试用不同的核函数，归纳误差最小的核函数就是最好的核函数。如针对傅立叶核、RBF核，结合信号处理问题中的函数回归问题，通过仿真实验，对比分析了在相同数据条件下，采用傅立叶核的SVM要比采用RBF核的SVM误差小很多。<br>（3）采用由Smits等人提出的混合核函数方法，该方法较之前两者是目前选取核函数的主流方法，也是关于如何构造核函数的又一开创性的工作．将不同的核函数结合起来后会有更好的特性，这是混合核函数方法的基本思想。<br>答案：B</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/笔试/" rel="tag"># 笔试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/27/math/" rel="next" title="math">
+                <i class="fa fa-chevron-left"></i> math
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/字节跳动2018校招算法方向编程题第3题/" rel="prev" title="字节跳动2018校招算法方向编程题第3题">
+                字节跳动2018校招算法方向编程题第3题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/cgfth.jpg" alt="cgfth">
+            
+              <p class="site-author-name" itemprop="name">cgfth</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xcgfth" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="cgfth@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cgfth</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

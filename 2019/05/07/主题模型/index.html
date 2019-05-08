@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="主题建模,自然语言理解,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主题模型产生的背景传统的信息检索（Information Retrieve）系统中通常使用文档相似性来判别查询（Query）与海量文本的相似性来得到两者之间的关联程度。然而，这种方法只能从文字表面得出query与查询文本之间的相似度，不能够表征两者之间语义上的关联。因此，基于这种文档相似度的方法的信息检索的返回字面上高度相似但语义不相关联的结果。为了解决这一问题，能够表征语义关联的主题模型就被提出">
+<meta name="keywords" content="主题建模,自然语言理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主题模型">
+<meta property="og:url" content="http://yoursite.com/2019/05/07/主题模型/index.html">
+<meta property="og:site_name" content="cgfth&#39;s blogs">
+<meta property="og:description" content="主题模型产生的背景传统的信息检索（Information Retrieve）系统中通常使用文档相似性来判别查询（Query）与海量文本的相似性来得到两者之间的关联程度。然而，这种方法只能从文字表面得出query与查询文本之间的相似度，不能够表征两者之间语义上的关联。因此，基于这种文档相似度的方法的信息检索的返回字面上高度相似但语义不相关联的结果。为了解决这一问题，能够表征语义关联的主题模型就被提出">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/imgs/TopicModel/LSA.png">
+<meta property="og:updated_time" content="2019-05-07T10:39:46.458Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="主题模型">
+<meta name="twitter:description" content="主题模型产生的背景传统的信息检索（Information Retrieve）系统中通常使用文档相似性来判别查询（Query）与海量文本的相似性来得到两者之间的关联程度。然而，这种方法只能从文字表面得出query与查询文本之间的相似度，不能够表征两者之间语义上的关联。因此，基于这种文档相似度的方法的信息检索的返回字面上高度相似但语义不相关联的结果。为了解决这一问题，能够表征语义关联的主题模型就被提出">
+<meta name="twitter:image" content="http://yoursite.com/imgs/TopicModel/LSA.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'cgfth'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/07/主题模型/">
+
+
+
+
+
+  <title>主题模型 | cgfth's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cgfth's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/主题模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgfth">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cgfth.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgfth's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">主题模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T08:37:25+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="主题模型产生的背景"><a href="#主题模型产生的背景" class="headerlink" title="主题模型产生的背景"></a>主题模型产生的背景</h1><p>传统的信息检索（Information Retrieve）系统中通常使用文档相似性来判别查询（Query）与海量文本的相似性来得到两者之间的关联程度。然而，这种方法只能从文字表面得出query与查询文本之间的相似度，不能够表征两者之间语义上的关联。因此，基于这种文档相似度的方法的信息检索的返回字面上高度相似但语义不相关联的结果。为了解决这一问题，能够表征语义关联的主题模型就被提出来了。<br>在自然语言理解的任务中，可以从文本的不同粒度（字符级、词级、句子级、段级和文档级）提取语义。主题模型就是一种能够从文档级表征文本语义的模型。主题建模就是在文档集合中学习、识别和提取主题的过程。<br>主题模型基于两个相同的假设：<br>（1）每个文档包含多个主题；<br>（2）每个主题含有多个单词。<br>实际上，文档的语义由一些隐变量（或潜在变量）管理。主题模型的目标就是揭示这些潜在变量，即主题。主题塑造了文档和语料库的含义。本文介绍常用的主题模型：LSA（Latent Semantic Analysis），pLSA(probability Latent Semantic Analysis)，LDA（Latent Dirichlet Allocation）和LDA2Vec。</p>
+<h1 id="LSA：潜在语义分析"><a href="#LSA：潜在语义分析" class="headerlink" title="LSA：潜在语义分析"></a>LSA：潜在语义分析</h1><p>LSA的核心思想是把我们所拥有的文档-术语矩阵分解成相互独立的文档-主题和主题-术语矩阵。<br>对于一个给定的语料库，假设该语料库中有$m$个文档，每个文档有$n$个单词。于是我们可以由此构造规模为$m\times n$的文档-术语矩阵$A$，其中行表示一篇文档，列表示该文档存在的单词。$A$中的元素$a_{ij}$可以由两种方式来确定：<br>（1）$a_{ij}$是$j$个词在$i$篇文档中的频度；<br>（2）$a_{ij}$用TF-IDF（Term Frequency–Inverse Document Frequency，词频-逆文本频率指数）来表示。<br>TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。<br>由上述方式构造出来的文档-术语矩阵是一个规模庞大但稀疏的矩阵，维度存在冗余。为了找出能够捕捉单词和文档关系的少数潜在主题，有必要降低$A$的维度。<br>我们使用SVD（Singular Value Decomposition，奇异值分解）截断来对$A$进行降维。SVD会将$A$分解成三个独立的矩阵的乘积，即$A = U \Lambda V$。其中$Lambda$是$A$的对角阵，称为奇异值，$U$称为文档-主题矩阵，$V$称为术语-主题矩阵。<br>截断SVD的降维方式是：<br>选择奇异值$\Lambda$中最大的$t$个数，且只保留矩阵$U$和$V$中的前$t$列。其中$t$是一个可以根据主题数量进行选择和调整的超参数。<br>我们以数据集20_newsgroup为例来简单体会一下LSA用来建模主题。在正式引入源码之前先介绍一下20_newsgroup数据集。20 newsgroups数据集18000篇新闻文章，一共涉及到20种话题，所以称作20 newsgroups text dataset，分为两部分：训练集和测试集，通常用来做文本分类。20种话题如下：</p>
+<ul>
+<li>alt.atheism</li>
+<li>comp.graphics</li>
+<li>comp.os.ms-windows.misc</li>
+<li>comp.sys.ibm.pc.hardware</li>
+<li>comp.sys.mac.hardware</li>
+<li>comp.windows.x</li>
+<li>misc.forsale</li>
+<li>rec.autos</li>
+<li>rec.motorcycles</li>
+<li>rec.sport.baseball</li>
+<li>rec.sport.hockey</li>
+<li>sci.crypt</li>
+<li>sci.electronics</li>
+<li>sci.med</li>
+<li>sci.space</li>
+<li>soc.religion.christian</li>
+<li>talk.politics.guns</li>
+<li>talk.politics.mideast</li>
+<li>talk.politics.misc</li>
+<li>talk.religion.misc</li>
+</ul>
+<h1 id="LSA源码"><a href="#LSA源码" class="headerlink" title="LSA源码"></a>LSA源码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> umap</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> nltk.corpus <span class="keyword">import</span> stopwords</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_20newsgroups</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> TruncatedSVD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pd.set_option(<span class="string">"display.max_colwidth"</span>, <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dataset = fetch_20newsgroups(data_home=<span class="string">"/data/cgfth/JuNB/TopicModel"</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>, remove=(<span class="string">'headers'</span>, <span class="string">'footers'</span>, <span class="string">'quotes'</span>))</span><br><span class="line">documents = dataset.data</span><br><span class="line">news_df = pd.DataFrame(&#123;<span class="string">'document'</span>:documents&#125;)</span><br><span class="line">news_df[<span class="string">'clean_doc'</span>] = news_df[<span class="string">'document'</span>].str.replace(<span class="string">"[^a-zA-Z#]"</span>, <span class="string">" "</span>)</span><br><span class="line">news_df[<span class="string">'clean_doc'</span>] = news_df[<span class="string">'clean_doc'</span>].apply(<span class="keyword">lambda</span> x: <span class="string">' '</span>.join([w <span class="keyword">for</span> w <span class="keyword">in</span> x.split() <span class="keyword">if</span> len(w)&gt;<span class="number">3</span>]))</span><br><span class="line">news_df[<span class="string">'clean_doc'</span>] = news_df[<span class="string">'clean_doc'</span>].apply(<span class="keyword">lambda</span> x: x.lower())</span><br><span class="line">stop_words = stopwords.words(<span class="string">'english'</span>)</span><br><span class="line">tokenized_doc = news_df[<span class="string">'clean_doc'</span>].apply(<span class="keyword">lambda</span> x: x.split()) </span><br><span class="line">tokenized_doc = tokenized_doc.apply(<span class="keyword">lambda</span> x: [item <span class="keyword">for</span> item <span class="keyword">in</span> x <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> stop_words])</span><br><span class="line">detokenized_doc = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(news_df)):</span><br><span class="line">    t = <span class="string">' '</span>.join(tokenized_doc[i])</span><br><span class="line">    detokenized_doc.append(t)</span><br><span class="line">news_df[<span class="string">'clean_doc'</span>] = detokenized_doc </span><br><span class="line">vectorizer = TfidfVectorizer(stop_words=<span class="string">'english'</span>, </span><br><span class="line">                             max_features= <span class="number">1000</span>,</span><br><span class="line">                             max_df = <span class="number">0.5</span>, </span><br><span class="line">                             smooth_idf=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">X = vectorizer.fit_transform(news_df[<span class="string">'clean_doc'</span>])</span><br><span class="line">svd_model = TruncatedSVD(n_components=<span class="number">20</span>, algorithm=<span class="string">'randomized'</span>, n_iter=<span class="number">100</span>, random_state=<span class="number">122</span>)</span><br><span class="line">svd_model.fit(X)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示与话题相关的一些术语</span></span><br><span class="line">terms = vectorizer.get_feature_names()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, comp <span class="keyword">in</span> enumerate(svd_model.components_):</span><br><span class="line">    terms_comp = zip(terms, comp)</span><br><span class="line">    sorted_terms = sorted(terms_comp, key= <span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse=<span class="literal">True</span>)[:<span class="number">7</span>]</span><br><span class="line">    print(<span class="string">"Topic "</span>+str(i)+<span class="string">": "</span>)</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> sorted_terms:</span><br><span class="line">        print(t[<span class="number">0</span>])</span><br><span class="line">    print(<span class="string">" "</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化, 如图1</span></span><br><span class="line">X_topics = svd_model.fit_transform(X)</span><br><span class="line">embedding = umap.UMAP(n_neighbors=<span class="number">150</span>, min_dist=<span class="number">0.5</span>, random_state=<span class="number">12</span>).fit_transform(X_topics)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">7</span>,<span class="number">5</span>))</span><br><span class="line">plt.scatter(embedding[:, <span class="number">0</span>], embedding[:, <span class="number">1</span>],  </span><br><span class="line">            c = dataset.target,</span><br><span class="line">            s = <span class="number">10</span>, <span class="comment"># size</span></span><br><span class="line">            edgecolor=<span class="string">'none'</span></span><br><span class="line">            )</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><div align="center"><img src="/imgs/TopicModel/LSA.png" height="200" width="400">LSA主题模型可视化</div><br>LSA是以共现表（文档-术语矩阵）的奇异值分解形式实现的，是用于小规模数据集，可用于文档分类/聚类、同义词/多义词检索、跨语言检索。SVD的计算是一个十分耗时的过程，并且潜在语义数量$t$的选择对结果的影响很大。此外，LSA的原理简单但得到的不是概率模型，缺乏统计基础，矩阵种的负值难以解释，难以对应到现实中的概念。</p>
+<h1 id="pLSA-概率潜在语义分析"><a href="#pLSA-概率潜在语义分析" class="headerlink" title="pLSA: 概率潜在语义分析"></a>pLSA: 概率潜在语义分析</h1><p>pLSA是基于派生自LCM（least common multiple，最小公倍数）的混合矩阵分解，属于概率图模型（probabilistic graphical model，概率图模型是用图来表示变量概率依赖关系的理论，结合概率论与图论的知识，利用图来表示与模型有关的变量的联合概率分布）中的生成模型。生成式模型的代表是：一元模型（Unigram Model）、混合一元模型、n元语法模型、隐马尔可夫模型、朴素贝叶斯模型等。判别式模型的代表是：最大熵模型、支持向量机、条件随机场、感知机模型等。<font color="red"><br><strong>多项式分布：</strong><br>若伯努利分布由单变量扩展到$d$维的向量$x_i$，$x_i={0,1}$且$\sum_{i = 1}^{d}x_i = 1$。进一步，假设$x_i$取$1$得概率为$\mu_i \in \sum_{i = 1}^{d} \mu_i = 1$。则：<br>\begin{equation}<br>\begin{split}<br>P(x|\mu) &amp;= \Pi_{i = 1}^{d} \mu_i^{x_i} \\<br>\mathbb{E}[X_i] &amp;= \mu_i \\<br>D[X_i] &amp;= \mu_i(1-\mu_i)<br>\end{split}<br>\tag{1}<br>\end{equation}<br>将二项分布扩展到多项分布（multinomial distribution）。多项分布描述在$N$次独立实验中有$m_i$次$x_i = 1$的概率。<br>\begin{equation}<br>\begin{split}<br>P(m_1,\cdots,m_d| N, \mu) = \frac{N!}{m_1!\cdots m_d!}\Pi_{i=1}^{d}\mu_i^{m_i}<br>\end{split}<br>\tag{2}<br>\end{equation}</font><br>一元模型假设每篇文档中的词出现的次数服从多项式分布（式2）。</p>
+<h1 id="LDA：-潜在狄利克雷分布"><a href="#LDA：-潜在狄利克雷分布" class="headerlink" title="LDA： 潜在狄利克雷分布"></a>LDA： 潜在狄利克雷分布</h1><h1 id="LDA2Vec"><a href="#LDA2Vec" class="headerlink" title="LDA2Vec"></a>LDA2Vec</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/主题建模/" rel="tag"># 主题建模</a>
+          
+            <a href="/tags/自然语言理解/" rel="tag"># 自然语言理解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/06/OOV问题和BPE算法/" rel="next" title="OOV问题和BPE算法">
+                <i class="fa fa-chevron-left"></i> OOV问题和BPE算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/08/自然语言处理面试常见问题/" rel="prev" title="自然语言处理面试常见问题">
+                自然语言处理面试常见问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/cgfth.jpg" alt="cgfth">
+            
+              <p class="site-author-name" itemprop="name">cgfth</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xcgfth" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="cgfth@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主题模型产生的背景"><span class="nav-number">1.</span> <span class="nav-text">主题模型产生的背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSA：潜在语义分析"><span class="nav-number">2.</span> <span class="nav-text">LSA：潜在语义分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSA源码"><span class="nav-number">3.</span> <span class="nav-text">LSA源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pLSA-概率潜在语义分析"><span class="nav-number">4.</span> <span class="nav-text">pLSA: 概率潜在语义分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA：-潜在狄利克雷分布"><span class="nav-number">5.</span> <span class="nav-text">LDA： 潜在狄利克雷分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA2Vec"><span class="nav-number">6.</span> <span class="nav-text">LDA2Vec</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cgfth</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

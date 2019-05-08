@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="自然语言处理,面试问题,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1 RNN是怎么运行的？2 什么是char-RNN，RNN结构图。3 Seq2Seq的结构。3 Attention的结构4 机器学习常用的分类算法：Logistic Regression, SVM, 决策树，随机森林等相关分类算法的原理，公式推导，模型评价，模型调参，使用场景。5 机器学习常用的聚类算法：K-Means, BDSCAN, SOM, LDA等算法的原理，模型参数的确定以及确定的方法，">
+<meta name="keywords" content="自然语言处理,面试问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理面试常见问题">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/自然语言处理面试常见问题/index.html">
+<meta property="og:site_name" content="cgfth&#39;s blogs">
+<meta property="og:description" content="1 RNN是怎么运行的？2 什么是char-RNN，RNN结构图。3 Seq2Seq的结构。3 Attention的结构4 机器学习常用的分类算法：Logistic Regression, SVM, 决策树，随机森林等相关分类算法的原理，公式推导，模型评价，模型调参，使用场景。5 机器学习常用的聚类算法：K-Means, BDSCAN, SOM, LDA等算法的原理，模型参数的确定以及确定的方法，">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-07T16:47:03.647Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理面试常见问题">
+<meta name="twitter:description" content="1 RNN是怎么运行的？2 什么是char-RNN，RNN结构图。3 Seq2Seq的结构。3 Attention的结构4 机器学习常用的分类算法：Logistic Regression, SVM, 决策树，随机森林等相关分类算法的原理，公式推导，模型评价，模型调参，使用场景。5 机器学习常用的聚类算法：K-Means, BDSCAN, SOM, LDA等算法的原理，模型参数的确定以及确定的方法，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'cgfth'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/自然语言处理面试常见问题/">
+
+
+
+
+
+  <title>自然语言处理面试常见问题 | cgfth's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">cgfth's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/自然语言处理面试常见问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgfth">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cgfth.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgfth's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">自然语言处理面试常见问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T00:01:19+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>1 RNN是怎么运行的？<br>2 什么是char-RNN，RNN结构图。<br>3 Seq2Seq的结构。<br>3 Attention的结构<br>4 机器学习常用的分类算法：Logistic Regression, SVM, 决策树，随机森林等相关分类算法的原理，公式推导，模型评价，模型调参，使用场景。<br>5 机器学习常用的聚类算法：K-Means, BDSCAN, SOM, LDA等算法的原理，模型参数的确定以及确定的方法，模型的评价，模型的使用场景（例如LDA应该确定几个主题，K-Means的k如何确定，DBSCAN密度可达与密度直达）。<br>6 特征工程： 特征选择，特征提取，PCA降维方法中的参数主成分的确定方法，如何进行特征选择。<br>7 Boosting和Bagging的区别。<br>8 数据如何去除噪声，如何找到离群点，异常值，现有机器学习算法哪些可以去除噪声。<br>9 HMM与N-gram模型之间的区别。<br>10 梯度消失与梯度爆炸。<br>11 奥卡姆剃须刀原理。<br>12 TCP三次握手的原理，为什么是三次而不是其他次。<br>13 进行数据处理时，如何过滤无用的信息，数据乱码的处理。<br>14 交叉熵与信息熵，信息增益与信息增益率，gini系数，具体如何计算。<br>15 BIC准则（贝叶斯信息准则）与AIC（赤池信息准则）。<br>16 前向传播与反向传播。<br>17 常见的损失函数。<br>18 请列出几种文本特征提取算法。</p>
+<p><font color="red">参考答案： 文档频率、信息增益、互信息、$\chi^2$统计、TF-IDF</font><br>19 简述几种自然语言处理开源工具包。</p>
+<p><font color="red">参考答案：LingPipe、FudanNLP、OpenNLP、CRF++、Standord CoreNLP、IKAnalyzer</font><br>20 简述无监督和有监督算法的区别。</p>
+<p><font color="red">参考答案：（1）有监督学习：对具有概念标记（分类）的训练样本进行学习，以尽可能对训练样本集外的数据进行标记（分类）预测。这里，所有的标记（分类）是已知的。因此，训练样本的岐义性低。<br>无监督学习：对没有概念标记（分类）的训练样本进行学习，以发现训练样本集中的结构性知识。这里，所有的标记（分类）是未知的。因此，训练样本的岐义性高。聚类就是典型的无监督学习<br>（2）有监督学习的样本全部带标记，无监督学习的样本全部不带标记。<br>PS:部分带标记的是半监督学习<br>（3）训练集有输入有输出是有监督，包括所有的回归算法分类算法，比如线性回归、决策树、神经网络、KNN、SVM等；训练集只有输入没有输出是无监督，包括所有的聚类算法，比如k-means 、PCA、 GMM等<br></font><br>21 深度学习如何提取query特征，如何利用深度学习计算语义相似度。<br>22 <font color="red">算法题</font>： 写二叉树的前序遍历，中序遍历，统计二叉树所有路径和。<br>22 RNN为什么会梯度消失，LSTM怎么能解决梯度消失问题。<br>23 介绍一下常见优化算法及其特点。<br>24 Dropout的原理。<br>25 交叉熵损失函数是什么。<br>26 介绍一下Word2vec，CBOW和Skip-gram的区别是什么。<br>27 GBDT和Xgboost介绍一下，并说一下区别。<br>28 <font color="red">算法题</font>：现在有词向量词典，计算句子相似度（Consine Similarity）。<br>29 介绍一下随机森林和Xgboost，有什么区别（从bagging和boosting角度）。<br>30 什么是SGD，什么是batch size。<br>31 深度学习优化算法有哪些，随便介绍一个。<br>32  现有一个神经网络和64个样本，Batch gradient descent和SGD的时间复杂度和效果比较；采用批梯度下降时，神经网络参数更新了几次。<br>33 font color=red&gt;算法题： Two Sum问题。<br>34 font color=red&gt;算法题：如何找到10万以内的所有质数。<br>35 Logistic回归的损失函数怎么来的，如何进行梯度更新。<br>36 Xgboost原理，xgboost有哪些参数，怎么调整xgboost的参数。<br>37 现在有三枚硬币，一个是一正一反，一个是两面都是正，一个是两面都是反，现在随机抛出一枚硬币是正面，那么这枚硬币的反面也是正面的概率。</p>
+<p><font color="red">参考答案：$\frac{2}{3}$</font><br>38 现在有一个比较小的数据表（包括id, score），另外有一个十分大的（上千万级别）的数据表（包括id, name），现在需要以id为索引将两张表合并，如何在O(n)时间复杂度完成。<br>39 GRU、LSTM以及RNN的区别在什么地方。<br>40 GBDT的损失函数是什么。<br>41 红黑树。<br>42 64匹马，8个跑道，选出速度最快的4匹马需要多少次。</p>
+<p><font color="red">参考答案：11</font><br>43 介绍一下LSTM（介绍LSTM时候提到RNN，打断询问RNN为什么有梯度消失问题，给出具体公式）。<br>44 LSTM用什么框架实现的，能不能介绍一下Word2ver如何使用在其中，使用Word2vec和不使用word2vec的效果如何。<br>45 正则化方法有哪些，介绍一下（说到L1和L2时，重点问了一下为什么梯度稀疏和梯度选择，用公式推导讲了一下）。<br>46 机器学习、数据挖掘和深度学习的区别。<br>47 <font color="red">算法题</font>：二叉搜索树的插入和搜索。<br>48 有序循环链表中（后简化为元素从小到大有序循环链表），如何在O(1)时间内完成最大值插入。<br>49 <font color="red">算法题</font>： 写代码实现列表 [0,0,6,2,8,0,0] —-&gt; [6,2,8,0,0,0]，要求O(n)时间复杂度和O(1)空间复杂度。<br>50 LSTM用来解决RNN的什么问题？如何解决的？既然说到forget gate，那么说一下forget gate的取值范围？（sigmoid 取值（0,1））forget gate是具体的值还是向量？（向量），如何理解这个向量？<br>51 深度学习用的什么框架，Tensorflow？（Keras），那介绍一下深度学习中的过拟合如何解决？（从数据、单模型、模型集成三个角度回答）。<br>52 深度学习优化算法用过哪些？讲讲Sgd和gd的区别？<br>53 对SVM（考虑线性可分情况）、LR和DT熟悉么？ 从损失函数说一下区别，SVM的损失函数是什么？（合页损失函数，写一下讲一下）。LR呢？（利用最大似然估计得出）。又问一下SVM线性可分情况下决策边界不同位置的损失值。DT如何进行特征选择？（ID3信息增益）。介绍一下信息熵？（随机变量不确定性，度量系统稳定性） [1/3,1/3,1/3]和[1/2,1/4,1/4]哪个的信息熵大？回归任务中如何进行特征选择？（平方损失准则）。<br>54 海量数据处理。现在有1千万行词，需要统计各个词出现的次数，目前有一台机器内存1G，磁盘100G？（海量数据处理blog的第一题，先利用Hash对原始文本进行分割（hash(word)%2000，分为2000个文件），再使用hashmap（python中的字典）在各个文件中分别统计）。<br>55 LTR（learning to rank）。介绍一下ltr的三种方式？其中pairwise在训练时怎么做？（转化为二分类）在测试的时候怎么做？<br>56 文本分类的项目中用到CNN没有？介绍一下CNN？那CNN在文本分类任务中卷积核和一般的图像任务中的卷积核有什么区别？<br>57 熟悉Attention么，介绍一下。<br>58 在你的项目中如何判断word2vec的效果好坏，如何评判对模型和结果的影响？项目中使用的xgboost是哪个版本的？谁写的？<br>59 如何从概率角度理解AUC？二分类问题中，一个正负类比是1:1000，一个是1:100，它们的AUC和ROC有什么区别？<br>60 了解交叉熵损失函数么？在哪个场景使用过？它和最大似然估计是什么关系？<br>61 <font color="red">算法题</font>： 覆盖字符串所有字符的最小字串。<br>62 <font color="red">算法题</font>：反转链表的前k个。<br>63 <font color="red">算法题</font>：求二叉树最大深度。<br>64 序列模型中markov和rnn的区别。</p>
+<p><font color="red">参考答案：rnn和hmm最本质的区别在于rnn没有马尔科夫假设，因此从理论上可以考虑很久的信息；同时hmm本质上是一个概率模型，而rnn不是；此外rnn具备神经网络的拟合非线性的能力。</font><br>65 <font color="red">算法题</font>：字符串出现第k多的字符。<br>66 一个过拟合模型和大量数据，如何判断这些数据有没有用？<br>67  lr和svm的区别。</p>
+<p><font color="red">参考答案：从lr的由来讲损失函数，对于svm讲最大间隔。区别在于损失函数不同；svm只需要考虑支持向量，而lr需要考虑所有的点；svm本质上是基于距离的，因此其输出无法直接产生概率，lr输出的是其属于分类的概率；在非线性的情况下，svm使用核函数解决，而lr通常不使用核函数；svm自带正则话，因此是结构风险最小化算法。</font><br>68 特征选择的方法。<br>69 AUC是什么？就是ROC曲线下的部分，表示什么？<br>70 <font color="red">算法题</font>：快速排序。<br>71 <font color="red">算法题</font>： 一个数组中超过一半的数字。<br>72 有一个能产生1-5的随机数的函数，怎么修改之后能够产生1-7的随机数。<br>73  快速排序，归并排序，深度遍历和广度遍历。<br>74 解释一下lucene原理，怎么进行中文分词，基于什么进行分词。<br>75 <font color="red">算法题</font>：a-z所有字母组合方式。<br>76 <font color="red">算法题</font>：输入一个数，输出这个整数里面最大的质数。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自然语言处理/" rel="tag"># 自然语言处理</a>
+          
+            <a href="/tags/面试问题/" rel="tag"># 面试问题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/07/主题模型/" rel="next" title="主题模型">
+                <i class="fa fa-chevron-left"></i> 主题模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/cgfth.jpg" alt="cgfth">
+            
+              <p class="site-author-name" itemprop="name">cgfth</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xcgfth" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="cgfth@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cgfth</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
