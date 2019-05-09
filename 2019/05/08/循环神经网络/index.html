@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="神经网络,">
+  <meta name="keywords" content="循环神经网络,">
 
 
 
@@ -79,20 +79,24 @@
 
 
 
-<meta name="description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
-<meta name="keywords" content="神经网络">
+<meta name="description" content="RNN的结构RNN的折叠结构与展开结构如图1所示。 图1 RNN的折叠结构与展开结构RNN的Cell如图2所示。图2 RNN单元  序列经过RNN通过式(1)处理：\begin{equation}\begin{split}h_t = \tanh (W \cdot [h_{t-1}, x_t] + b_0)\end{split}\tag{1}\end{equation}RNN是在随时间传递的神经网络">
+<meta name="keywords" content="循环神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BP神经网络">
-<meta property="og:url" content="http://yoursite.com/2019/04/29/BP神经网络/index.html">
+<meta property="og:title" content="循环神经网络">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/循环神经网络/index.html">
 <meta property="og:site_name" content="cgfth&#39;s blogs">
-<meta property="og:description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
+<meta property="og:description" content="RNN的结构RNN的折叠结构与展开结构如图1所示。 图1 RNN的折叠结构与展开结构RNN的Cell如图2所示。图2 RNN单元  序列经过RNN通过式(1)处理：\begin{equation}\begin{split}h_t = \tanh (W \cdot [h_{t-1}, x_t] + b_0)\end{split}\tag{1}\end{equation}RNN是在随时间传递的神经网络">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/imgs/BPNN/BPNN.png">
-<meta property="og:updated_time" content="2019-05-04T11:54:58.870Z">
+<meta property="og:image" content="http://yoursite.com/imgs/RNN/unfoldRNN.png">
+<meta property="og:image" content="http://yoursite.com/imgs/RNN/RNNCell.png">
+<meta property="og:image" content="http://yoursite.com/imgs/RNN/LSTM.png">
+<meta property="og:image" content="http://yoursite.com/imgs/RNN/GRU.png">
+<meta property="og:image" content="http://yoursite.com/imgs/RNN/SRUCell.png">
+<meta property="og:updated_time" content="2019-05-08T16:21:29.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BP神经网络">
-<meta name="twitter:description" content="初识BPBP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。 图1 BP神经网络在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。如图1，我们记BP的网络层数为$n_l$，则$n">
-<meta name="twitter:image" content="http://yoursite.com/imgs/BPNN/BPNN.png">
+<meta name="twitter:title" content="循环神经网络">
+<meta name="twitter:description" content="RNN的结构RNN的折叠结构与展开结构如图1所示。 图1 RNN的折叠结构与展开结构RNN的Cell如图2所示。图2 RNN单元  序列经过RNN通过式(1)处理：\begin{equation}\begin{split}h_t = \tanh (W \cdot [h_{t-1}, x_t] + b_0)\end{split}\tag{1}\end{equation}RNN是在随时间传递的神经网络">
+<meta name="twitter:image" content="http://yoursite.com/imgs/RNN/unfoldRNN.png">
 
 
 
@@ -122,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/29/BP神经网络/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/循环神经网络/">
 
 
 
 
 
-  <title>BP神经网络 | cgfth's blogs</title>
+  <title>循环神经网络 | cgfth's blogs</title>
   
 
 
@@ -307,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/BP神经网络/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/循环神经网络/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cgfth">
@@ -324,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">BP神经网络</h1>
+          <h1 class="post-title" itemprop="name headline">循环神经网络</h1>
         
 
         <div class="post-meta">
@@ -336,8 +340,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-29T18:51:58+08:00">
-                2019-04-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-08T22:12:50+08:00">
+                2019-05-08
               </time>
             
 
@@ -396,12 +400,25 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="初识BP"><a href="#初识BP" class="headerlink" title="初识BP"></a>初识BP</h1><p>BP（Back Propagation）神经网络是整个深度学习的基础。当前，大多数深度神经网络仍然采用BP作为误差反向传播的技术。通常，BP是指具有三层网络结构的浅层神经网络，如图1。实际上，BP除了输入层和输出层外，只有1层隐藏层，所以它是浅层神经网络。</p>
-<p><div align="center"><img src="/imgs/BPNN/BPNN.png" height="200" width="400">图1 BP神经网络</div><br>在正式推导BP的数学表示之前，我们需要先明确一下相关数学符号的意义。<br>如图1，我们记BP的网络层数为$n_l$，则$n_l=3$。记BP网络的第$l(l=1,2,3)$层为$L_l$。故图1中的输入层、隐层和输出层分别记为$L_1$、$L_2$和$L_3$。 记$L_l$的第$i$个神经元与$L_{l+1}$的第$j$个神经元连接的权重为$W_{ij}^{(l)}$。图1中的$1$是一个偏置项，记$L_l$的偏置项为$b^{(l)}$。</p>
-<h1 id="BP前向传播"><a href="#BP前向传播" class="headerlink" title="BP前向传播"></a>BP前向传播</h1><p>设$L_l$的第$i$个神经元的输入为$z_i^{(l)}$，$L_l$的第$i$神经元的输出为$a_i^{(l)}$。显然，当$l=1$时，$a_i^{l}=x_i$。假设所使用的激活函数记为$f(x)$。于是，BP的前向传播可如下式计算：<br>隐层：<br>\begin{equation}<br>\begin{split}<br>z_1^{(2)} &amp;= W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)} \\<br>a_{1}^{(2)} &amp;= f(z_1^{(2)}) = f(W_{11}^{(1)}x_1 + W_{21}^{(1)}x_2 + \cdots + W_{n1}^{(1)}x_n + b^{(1)}) \\<br>z_2^{(2)} &amp;= W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)} \\<br>a_{2}^{(2)} &amp; = f(z_2^{(2)}) = f(W_{12}^{(1)}x_1 + W_{22}^{(1)}x_2 + \cdots + W_{n2}^{(1)}x_n + b^{(1)}) \\<br>\vdots \\<br>z_m^{(2)} &amp;= W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)} \\<br>a_m^{(2)} &amp;= f(z_m^{(2)}) = f(W_{1m}^{(1)}x_1 + W_{2m}^{(1)}x_2 + \cdots + W_{nm}^{(1)}x_n + b^{(1)})<br>\end{split}<br>\tag{1}<br>\end{equation}<br>输出层：<br>\begin{equation}<br>\begin{split}<br>z_1^{(3)} &amp;= W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_{1}^{(3)} &amp;= f(z_1^{(3)}) = f(W_{11}^{2}a_{1}^{(2)} + W_{21}^{(2)}a_{2}^{(2)} + \cdots + W_{m1}^{(2)}a_{m}^{(2)} + b^{(2)}) \\<br>z_2^{(3)} &amp;= W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_{2}^{(3)} &amp;= f(z_2^{(3)}) = f(W_{12}^{2}a_{1}^{(2)} + W_{22}^{(2)}a_{2}^{(2)} + \cdots + W_{m2}^{(2)}a_{m}^{(2)} + b^{(2)}) \\<br>\vdots \\<br>z_p^{(3)} &amp;= W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)} \\<br>a_p^{(3)} &amp;= f(z_p^{(3)}) = f(W_{1p}^{2}a_{1}^{(2)} + W_{2p}^{(2)}a_{2}^{(2)} + \cdots + W_{mp}^{(2)}a_{m}^{(2)} + b^{(2)})<br>\end{split}<br>\tag{2}<br>\end{equation}<br>我们将上面的输出层的式子用统一的形式表述之。即<br>\begin{equation}<br>\hat{y} = f(\sum_{i = 1}^{m}w_{ij}^{(2)}a_i^{(2)} + b^{(2)}), j = 1, 2, \cdots, p<br>\tag{3}<br>\end{equation}</p>
-<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h1><p>设有$s$个训练样本${(X^{(1)}, y^{(1)}), (X^{(2)}, y^{(2)}), \cdots, (X^{(s)}, y^{(s)})}$。对于训练样本$(X, y)$，其损失函数为：<br>\begin{equation}<br>L(W, b) = \frac{1}{2} \left|| \hat{y}- y \right||^2<br>\tag{4}<br>\end{equation}<br>通常，为了防止模型过拟合，损失函数会加上正则项$R$。即<br>\begin{equation}<br>L(W, b) = L(W, b) + R<br>\tag{5}<br>\end{equation}<br>其中$R$为：<br>\begin{equation}<br>R = \frac{\lambda}{2}\sum_{l=1}^{n_l - 1}\sum_{i = 1}^{q_l}\sum_{j = 1}^{q_{l + 1}}(W_{ij}^{(l)})<br>\tag{6}<br>\end{equation}<br>这里的$q_l$表示第$L_l$上的神经元数量。所以最终的损失函数$L$可形式化为：<br>\begin{equation}<br>L(w, b) = \frac{1}{s}\sum_{i = 1}^{s}L(W, b) + \frac{\lambda}{2}\sum_{l=1}^{n_l - 1}\sum_{i = 1}^{q_l}\sum_{j = 1}^{q_{l + 1}}(W_{ij}^{(l)})<br>\tag{7}<br>\end{equation}<br>其中$\lambda$为正则化率。</p>
-<p>为使损失函数$L(w, b)$得到最小值，我们需要通过梯度下降来调整权重$W$以及偏置项$b$。其数学表述如下：<br>\begin{equation}<br>\begin{split}<br>W_{ij}^{(l)} &amp;= W_{ij}^{(l)} -\alpha \frac{\partial}{\partial W_{ij}^{(l)}} L(W, b) \\<br>b_{i}^{(l)} &amp;= b_{i}^{(l)} - \alpha \frac{\partial}{\partial b_{i}^{(l)}} L(W, b)<br>\end{split}<br>\tag{8}<br>\end{equation}<br>其中$\alpha$称为学习率。<br>我们对$(7)$式分别对$W$和$b$求偏导：<br>\begin{equation}<br>\begin{split}<br>\frac{\partial}{\partial W_{ij}^{(l)}}L(W, b) &amp;= \frac{1}{s}\sum_{i = 1}^{s}\frac{\partial}{\partial W_{ij}^{(l)}}L(W, b) + \lambda W_{ij}^{(l)} \\<br>\frac{\partial}{\partial b_i^{(l)}}L(W, b) &amp;= \frac{1}{s}\sum_{i = 1}^{s}\frac{\partial}{\partial b_i^{(l)}}L(W, b)<br>\end{split}<br>\tag{9}<br>\end{equation}</p>
-<h1 id="BP源码"><a href="#BP源码" class="headerlink" title="BP源码"></a>BP源码</h1><p><a href="https://github.com/xcgfth/MyFuture/tree/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/BP" target="_blank" rel="noopener">BP源码</a></p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="RNN的结构"><a href="#RNN的结构" class="headerlink" title="RNN的结构"></a>RNN的结构</h1><p>RNN的折叠结构与展开结构如图1所示。</p>
+<div align="center"><img src="/imgs/RNN/unfoldRNN.png" height="200" width="400">图1 RNN的折叠结构与展开结构</div><br>RNN的Cell如图2所示。<br><div align="center"><img src="/imgs/RNN/RNNCell.png" height="200" width="400">图2 RNN单元</div>
+
+<p>序列经过RNN通过式(1)处理：<br>\begin{equation}<br>\begin{split}<br>h_t = \tanh (W \cdot [h_{t-1}, x_t] + b_0)<br>\end{split}<br>\tag{1}<br>\end{equation}<br>RNN是在随时间传递的神经网络，其深度即为时间的长度。因此，随着时间变长，神经网络逐渐加深，于是当将BPTT应用于较深的RNN时，会产生“梯度消失”问题。</p>
+<p><font color="red">梯度消失:在训练神经网络过程中，神经网络权重的更新值与误差函数梯度成正比。然而在某些情况下（如RNN等这类超深的神经网络中），梯度值会几乎消失，使得权重无法更新，甚至导致神经网络完全无法继续训练。 这种现象称为梯度消失。</font><br>为解决“梯度消失”问题，研究者改进了RNN，从而产生了LSTM。</p>
+<h1 id="LSTM的结构"><a href="#LSTM的结构" class="headerlink" title="LSTM的结构"></a>LSTM的结构</h1><p>LSTM的结构如图3所示：</p>
+<div align="center"><img src="/imgs/RNN/LSTM.png" height="200" width="400">图3 LSTM单元</div>
+
+<p>LSTM的表达式：<br>\begin{equation}<br>\begin{split}<br>f_t &amp;= \sigma(W_f \cdot [h_{t - 1}, x_t] + b_f) \\<br>i_t &amp;= \sigma(W_i \cdot [h_{t - 1}, x_t] + b_i) \\<br>\overset{\sim}{C}_t &amp;= \tanh(W_C \cdot [h_{t - 1}, x_t] + b_C) \\<br>C_t &amp;= f_t \times C_{t-1} + i_t \times \overset{\sim}{C}_t \\<br>o_t &amp;= \sigma(W_o \cdot [h_{t - 1}, x_t] + b_o) \\<br>h_t &amp;= o_t \times \tanh(C_t)<br>\end{split}<br>\tag{2}<br>\end{equation}</p>
+<p>LSTM有通过精心设计的称作“门”的结构来去除或者增加信息到细胞状态的能力。门是一种让信息选择式通过的方法。它们包含一个sigmoid神经网络层和一个pointwise乘法（点乘）操作。Sigmoid层输出0到1之间的数值，描述每个部分有多少量可以通过。 0代表“不许任何量通过”；1代表“允许任何量通过” 。LSTM 拥有三个门，来保护和控制细胞状态，分别是：遗忘门、输入门、输出门。在输出门前面会进行当前时间的细胞状态更新。每一个状态会传递一个隐藏层特征和细胞状态特征给下一个状态。</p>
+<h1 id="GRU的结构"><a href="#GRU的结构" class="headerlink" title="GRU的结构"></a>GRU的结构</h1><p>GRU的结构如图4所示：</p>
+<div align="center"><img src="/imgs/RNN/GRU.png" height="200" width="400">图4 GRU单元</div>
+
+<p>GRU与LSTM相似。与LSTM相比，GRU去除掉了细胞状态。使用隐藏状态来进行信息的传递。GRU只包含两个门：更新门和重置门。更新门的作用类似于 LSTM 中的遗忘门和输入门。它决定了要忘记哪些信息以及哪些新信息需要被添加；重置门用于决定遗忘先前信息的程度。GRU 的张量运算较少，因此它比 LSTM 的训练更快一下。<br>GRU的表达式：</p>
+<p>\begin{equation}<br>\begin{split}<br>z_t &amp;= \sigma(W_z \cdot [h_{t-1}, x_t]) \\<br>r_t &amp;= \sigma(W_r \cdot [h_{t-1}, x_t]) \\<br>\overset{\sim}{h}_t &amp;= \tanh(W\cdot [r_t\times h_{t-1}, x_t])  \\<br>h_t &amp;= (1 - z_t) \times h_{t-1} + z_t \times \overset{\sim}{h}_t<br>\end{split}<br>\tag{3}<br>\end{equation}</p>
+<h1 id="SRU的结构"><a href="#SRU的结构" class="headerlink" title="SRU的结构"></a>SRU的结构</h1><p>SRU的结构如图5所示：</p>
+<div align="center"><img src="/imgs/RNN/SRUCell.png" height="200" width="400">图5 SRU单元</div>
+
+<p>\begin{equation}<br>\begin{split}<br>\overset{\sim}{x_t} &amp;= Wx_t \\<br>f_t &amp;= \sigma(W_f x_t + b_f) \\<br>r_t &amp;= \sigma(W_r x_t + b_r) \\<br>c_t &amp;= f_t \odot c_{t-1} + (1 - f_t) \odot \overset{\sim}{x}_t \\<br>h_t &amp;= r_t \odot g(c_t) + (1 - r_t) \odot x_t<br>\end{split}<br>\tag{4}<br>\end{equation}<br>其中，f表示forget gate，r表示 reset gate，h表示output state，c表示internal state。x表示输入。</p>
 
       
     </div>
@@ -419,7 +436,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+            <a href="/tags/循环神经网络/" rel="tag"># 循环神经网络</a>
           
         </div>
       
@@ -432,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/29/字节跳动2018校招算法方向编程题第3题/" rel="next" title="字节跳动2018校招算法方向编程题第3题">
-                <i class="fa fa-chevron-left"></i> 字节跳动2018校招算法方向编程题第3题
+              <a href="/2019/05/08/自然语言处理面试常见问题/" rel="next" title="自然语言处理面试常见问题">
+                <i class="fa fa-chevron-left"></i> 自然语言处理面试常见问题
               </a>
             
           </div>
@@ -441,10 +458,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/30/分治算法/" rel="prev" title="分治算法">
-                分治算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -594,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初识BP"><span class="nav-number">1.</span> <span class="nav-text">初识BP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BP前向传播"><span class="nav-number">2.</span> <span class="nav-text">BP前向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反向传播"><span class="nav-number">3.</span> <span class="nav-text">反向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BP源码"><span class="nav-number">4.</span> <span class="nav-text">BP源码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN的结构"><span class="nav-number">1.</span> <span class="nav-text">RNN的结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LSTM的结构"><span class="nav-number">2.</span> <span class="nav-text">LSTM的结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU的结构"><span class="nav-number">3.</span> <span class="nav-text">GRU的结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SRU的结构"><span class="nav-number">4.</span> <span class="nav-text">SRU的结构</span></a></li></ol></div>
             
 
           </div>
