@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="神经网络,自然语言理解,多任务学习,">
 
 
 
@@ -79,13 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="cgfth&#39;s blogs">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+<meta name="description" content="本文是对论文对Multi-Task Deep Neural Networks for Natural Language Understanding的归纳与总结 动机学习文本的向量空间表示是自然语言理解（Natural Language Understanding, NLU）任务的基础。有两种流行方法可以完成文本的向量表示学习——多任务学习（Multi-Task Learning， MTL）和语言模">
+<meta name="keywords" content="神经网络,自然语言理解,多任务学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用于自然语言理解的多任务深度神经网络">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/用于自然语言理解的多任务深度神经网络/index.html">
 <meta property="og:site_name" content="cgfth&#39;s blogs">
+<meta property="og:description" content="本文是对论文对Multi-Task Deep Neural Networks for Natural Language Understanding的归纳与总结 动机学习文本的向量空间表示是自然语言理解（Natural Language Understanding, NLU）任务的基础。有两种流行方法可以完成文本的向量表示学习——多任务学习（Multi-Task Learning， MTL）和语言模">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/imgs/MT-DNN/arch.png">
+<meta property="og:updated_time" content="2019-05-30T15:42:20.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cgfth&#39;s blogs">
+<meta name="twitter:title" content="用于自然语言理解的多任务深度神经网络">
+<meta name="twitter:description" content="本文是对论文对Multi-Task Deep Neural Networks for Natural Language Understanding的归纳与总结 动机学习文本的向量空间表示是自然语言理解（Natural Language Understanding, NLU）任务的基础。有两种流行方法可以完成文本的向量表示学习——多任务学习（Multi-Task Learning， MTL）和语言模">
+<meta name="twitter:image" content="http://yoursite.com/imgs/MT-DNN/arch.png">
 
 
 
@@ -115,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/3/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/用于自然语言理解的多任务深度神经网络/">
 
 
 
 
 
-  <title>Archive | cgfth's blogs</title>
+  <title>用于自然语言理解的多任务深度神经网络 | cgfth's blogs</title>
   
 
 
@@ -140,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -286,251 +293,187 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/用于自然语言理解的多任务深度神经网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cgfth">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cgfth.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cgfth's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">用于自然语言理解的多任务深度神经网络</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-30T20:53:34+08:00">
+                2019-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        Um..! 26 posts in total. Keep on posting.
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/math/" itemprop="url">
-              
-                <span itemprop="name">math</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T16:53:36+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/强化学习/" itemprop="url">
-              
-                <span itemprop="name">强化学习</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T16:45:00+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文是对论文对<font color="red"><em>Multi-Task Deep Neural Networks for Natural Language Understanding</em></font>的归纳与总结</p>
+<h1 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h1><p>学习文本的向量空间表示是自然语言理解（Natural Language Understanding, NLU）任务的基础。有两种流行方法可以完成文本的向量表示学习——多任务学习（Multi-Task Learning， MTL）和语言模型预训练（Language Model Pre-Training.）。作者认为，多任务的联合学习可以让在一个任务中学习到的知识有益于其他的任务。此外，作者分析了MTL引起了很多人的兴趣的两个原因：（1）DNN（Deep Neural Network）监督学习要求大量特定任务的标记数据；（2）MTL的使用受益于正规化效应通过避免对特定任务的过拟合，故而能够使得学习到的表示能够普遍适应跨任务。<br>与MTL相比，语言模型预训练通过利用大量无标记数据学习通用语言表示是有效的。一些突出的例子是ELMo，GPT，BERT等。这些神经网络语言模型都是用无监督目标在文本数据上训练的。作者认为，MTL和语言模型与训练是相互补充的技术，并且可以将它们结合起来一改进文本表示，从而提升不同NLU（Natural Language Understanding）任务的性能。为此，作者将BERT作为已有的MT-DNN的共享的文本编码层，如图1。</p>
+<div align="center"><img src="/imgs/MT-DNN/arch.png" height="200" width="800">图1 用于表示学习的MT-DNN的架构</div>
 
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/NLP/" itemprop="url">
-              
-                <span itemprop="name">NLP</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T14:38:54+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>MT-DNN模型结合了四种类型的NLU的任务：单句分类，成对文本分类，文本相似性打分，相关度排名。我们具体介绍这四种类型的任务。</p>
+<ul>
+<li>单句分类： 给定一个句子，模型要用预定义的类标签标记它。如<strong>CoLA</strong>任务是要预测一个英语句子是否语法合理的；<strong>SST-2</strong>任务是要确定来自于观影评价的句子的情感是积极的还是消极的。</li>
+<li>文本相似性。给定一对句子，模型预测两个句子的语义相似性，是一个回归任务。<strong>SST-B</strong>在GLUE中仅有的此类任务的例子。</li>
+<li>成对文本分类：给定一对句子，模型基于预定义的标记集确定两个句子的关系。如<strong>RTE</strong>和<strong>MNLI</strong>就是语言推断任务，其目标就是预测一个句子关语另一个是否是一个蕴含，对立或中立的。<strong>QQP</strong>和<strong>MRPC</strong>是两个包含了句子对的段落级数据集，该任务是要预测一对段落中的句子是语义等价的。</li>
+<li>相关度排名： 给定一个查询和候选答案列表，模型对所有候选答案与查询的相关度排序。<strong>QNLI</strong>涉及到评价是否一个句子包含给定查询的正确的答案。</li>
+</ul>
+<h1 id="MT-DNN模型"><a href="#MT-DNN模型" class="headerlink" title="MT-DNN模型"></a>MT-DNN模型</h1><p>MT-DNN的模型架构如图1所示，下层被所有的任务共享，而顶层表示特定任务输出。在$l_1$,输出词序列$X$首先被表示一系列嵌入向量，每个词一个向量。然后，Transformer编码器通过self-attention捕捉没个此的上下文信息，并且在$l2$生成一系列上下文嵌入。这就是被多任务目标所共享的语义表示。<br><strong>词典编码器</strong>：输入$X={x_1, \cdots, x_m}$是长度为$m$的一系列token（文本经过分词后产生结果叫做token）。第一个token$x_1$总是<strong>[CLS]</strong>。如果$X$是一个句子对$(X_1, X_2)$，我们用一个特殊的token——<strong>[SEP]</strong>来分离两个句子。词典编码器将$X$映射进一系列的输入嵌入向量，每一个token都有一个嵌入向量，嵌入向量是对应的词，分割和位置嵌入的汇总。<br><strong>Transformer编码器</strong>：作者使用了多层双向Transformer编码器以将输入表示向量映射一系列的上下文嵌入向量$\bf C \in \mathbb{R}^{d\times m}$。与BERT模型不同的是，BERT模型通过与训练和通过微调（fine-tuning）来适应每一个单一的任务以学习表示，而MT-DNN是使用多任务目标来学习表示。<br><strong>单句子分类输出</strong>：假设$x$是token——<strong>[CLS]</strong>的上下文嵌入，其可以被是为输入句子$X$的语义表示。以<strong>SST-2</strong>作为示例，$X$被标记为类$c$的概率是通过带有$softmax$的逻辑回归预测的：<br>\begin{equation}<br>P_r(c|X) = softmax(\bf W^T_{SST} \cdot x)<br>\tag{1}<br>\end{equation}<br>其中$W_{SST}$是特定任务的参数矩阵。<br><strong>文本相似性输出</strong>：以$STS-B$任务作为示例。假定$x$是<strong>[CLS]</strong>的上下文嵌入，其能够视作输入句子对$(X_1, X_2)$的语义表示。作者引入了特定任务的参数向量$\bf W^T_{SST}$以计算相似性得分：<br>\begin{equation}<br>Sim(X_1, X_2) = g(\bf W^T_{SST} \cdot x)<br>\tag{2}<br>\end{equation}<br>其中$g(z)=\frac{1}{1 + \exp{(-z)}}$是sigmoid函数，该函数将得分映射到$[0, 1]$之间的实数值。<br><strong>成对的文本分类输出</strong>：以自然语言推断作为示例（NLI）。NLI任务定义了一个具有$m$个词的前提（premise）$P=(p1,\cdots,p_m)$以及具有$n$个词的假设(hypothesis)$H=(h_1, \cdots, h_n)$，其目的是要找到$P$与$H$之间的逻辑关系$R$。该模块的输出组黁了随机答案网络（Stochastic Answer Network, SAN）。SAN的答案模块使用多步推理，而不是直接预测给定输入的蕴含，其维护了一个状态并且精细地迭代该预测。<br>SAN的工作流程为：我们通过凭借$P$中词的上下文嵌入（这是Transformer编码器的输出），首先构建前提$P$的working memory，记为$M^p \in \mathbb{R}^{d\times m}$。相似地，假设$H$的working memory记为$M^h \in \mathbb{R}^{d\times n}$。然后，我们进行在memory上进行$K$步推理以输出关系标签，这里的$K$是一个超参数。在开始时，初始状态$s^0$是$M^h$的加权和：<br>\begin{equation}<br>s^0 = \sum_j \alpha_jM_j^h$<br>\tag{3}<br>\end{equation}<br>其中$\alpha_j$为：<br>\begin{equation}<br>\alpha_j = \frac{\exp(w_1^T\cdot M_j^h)}{\sum_i \exp(w_1^T\cdot M_i^h)}<br>\tag{4}<br>\end{equation}</p>
+<p>在时间步$k(k\in\{1, 2, \cdots, K - 1 \})$，此时的状态定义为:<br>\begin{equation}<br>s^k = GRU(s^{k-1},x^k)<br>\tag{5}<br>\end{equation}<br>这里的$x^k$是由先前的状态$s^{k-1}$和memory $M^p$计算得到的：<br>\begin{equation}<br>x^k=\sum_j\beta_j M_j^p<br>\tag{6}<br>\end{equation}<br>且<br>\begin{equation}<br>\beta_j = softmax(s^{k-1}\bf W_2^T M^p)<br>\tag{7}<br>\end{equation}</p>
+<p>一个一层分类器被用来确定第$k$步的关系：<br>\begin{equation}<br>P_r^k = softmax(\bf W_3^T [s^k;x^k;|s^k-x^k|;s^k\cdot x^k])<br>\tag{8}<br>\end{equation}<br>每一个$P_r$都是关系$R\in\mathcal{R}$的概率分布。</p>
+<p><strong>相关度排名输出</strong>：以<strong>QNLI</strong>作为示例。假设$x$是<strong>[CLS]</strong>的上下文嵌入向量，该向量是问题和候答案$(Q,A)$的语义关系。作者计算相关度得分：<br>\begin{equation}<br>Rel(Q, A) = g(W_{QNLI}^T\cdot x)<br>\tag{9}<br>\end{equation}</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/知识图谱/" itemprop="url">
-              
-                <span itemprop="name">知识图谱</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T14:18:48+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/随机森林/" itemprop="url">
-              
-                <span itemprop="name">随机森林</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T14:06:58+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/27/random-forest/" itemprop="url">
-              
-                <span itemprop="name">random-forest</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T14:04:21+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/自然语言理解/" rel="tag"># 自然语言理解</a>
+          
+            <a href="/tags/多任务学习/" rel="tag"># 多任务学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/25/NLP-toolkits/" rel="next" title="NLP toolkits">
+                <i class="fa fa-chevron-left"></i> NLP toolkits
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -538,6 +481,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -558,8 +505,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -637,6 +593,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任务"><span class="nav-number">2.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MT-DNN模型"><span class="nav-number">3.</span> <span class="nav-text">MT-DNN模型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -771,6 +743,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
